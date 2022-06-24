@@ -55,7 +55,8 @@ class FrontendController extends Controller
         // $teams = Team::where('name', 'dysul')->count();
 
         $teams = Team::paginate(5);
-        return view('team', compact('teams'));
+        $teams_count = Team::count();
+        return view('team', compact('teams', 'teams_count'));
     }
 
     function teaminsert(Request $request)
@@ -96,5 +97,27 @@ class FrontendController extends Controller
             Team::find($id)->delete();
             return back();
         }
+    }
+
+    function teamEdit($id)
+    {
+        // $team = Team::find($id);
+        return view('teamedit', [
+            'team' => Team::find($id),
+        ]);
+        // return view('teamedit')->with('team', $team);
+        // return view('teamedit', compact('team'));
+    }
+
+    function teamEditPost(Request $request, $id)
+    {
+        //    UPDATE teams SET 'name' = $name. 'phone_number' = $phone_number, 'password' = $password WHERE id = $id
+        Team::find($id)->update([
+            'name' => $request->name,
+            'phone_number' => $request->phone_number,
+            'password' => $request->password,
+        ]);
+        // return back();
+        return redirect('team');
     }
 }

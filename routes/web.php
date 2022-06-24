@@ -20,3 +20,5 @@ Route::get('contact', [FrontendController::class, 'contact']);
 Route::get('team', [FrontendController::class, 'team']);
 Route::post('team/insert', [FrontendController::class, 'teaminsert']);
 Route::get('team/delete/{id}', [FrontendController::class, 'teamDelete']);
+Route::get('team/edit/{id}', [FrontendController::class, 'teamEdit']);
+Route::post('team/edit/post/{id}', [FrontendController::class, 'teamEditPost']);
