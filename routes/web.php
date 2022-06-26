@@ -19,6 +19,12 @@ Route::get('about', [FrontendController::class, 'about']);
 Route::get('contact', [FrontendController::class, 'contact']);
 Route::get('team', [FrontendController::class, 'team']);
 Route::post('team/insert', [FrontendController::class, 'teaminsert']);
-Route::get('team/delete/{id}', [FrontendController::class, 'teamDelete']);
+Route::get('team/softdelete/{id}', [FrontendController::class, 'teamSoftDelete']);
 Route::get('team/edit/{id}', [FrontendController::class, 'teamEdit']);
 Route::post('team/edit/post/{id}', [FrontendController::class, 'teamEditPost']);
+Route::get('team/restore/{id}', [FrontendController::class, 'teamRestore']);
+Route::get('team/delete/{id}', [FrontendController::class, 'teamDelete']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -56,7 +56,8 @@ class FrontendController extends Controller
 
         $teams = Team::paginate(5);
         $teams_count = Team::count();
-        return view('team', compact('teams', 'teams_count'));
+        $deleted_teams = Team::onlyTrashed()->get();
+        return view('team', compact('teams', 'teams_count', 'deleted_teams'));
     }
 
     function teaminsert(Request $request)
@@ -87,7 +88,7 @@ class FrontendController extends Controller
         return back()->with('success', 'Add member successfully!');
     }
 
-    function teamDelete($id)
+    function teamSoftDelete($id)
     {
         if ($id == "all") {
             Team::where('deleted_at', NULL)->delete();
@@ -97,6 +98,12 @@ class FrontendController extends Controller
             Team::find($id)->delete();
             return back();
         }
+    }
+
+    function teamDelete($id)
+    {
+        Team::where('id', $id)->forceDelete();
+        return back();
     }
 
     function teamEdit($id)
@@ -119,5 +126,17 @@ class FrontendController extends Controller
         ]);
         // return back();
         return redirect('team');
+    }
+
+    function teamRestore($id)
+    {
+        if ($id == "all") {
+            Team::onlyTrashed()->restore();
+            return back();
+        } else {
+            //DELETE FROM teams WHERE id = $id;
+            Team::onlyTrashed()->where('id', $id)->restore();
+            return back();
+        }
     }
 }
