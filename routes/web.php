@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\{FrontendController, HomeController};
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,5 @@ Route::get('team/delete/{id}', [FrontendController::class, 'teamDelete']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/users', [HomeController::class, 'users'])->name('users');

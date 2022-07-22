@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Team;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -26,6 +27,13 @@ class HomeController extends Controller
     {
         return view('home', [
             'teams' => Team::all(),
+        ]);
+    }
+
+    public function users()
+    {
+        return view('users', [
+            'users' => User::all(),
         ]);
     }
 }

@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.dashboardmaster')
 
 @section('content')
-<div class="container">
+<div class=" mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Team Members') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -33,9 +33,6 @@
                             @endforeach
                         </tbody>
                     </table>
-
-
-                    {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>
