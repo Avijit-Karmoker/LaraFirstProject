@@ -18,6 +18,7 @@
                             <tr>
                                 <th>Sl No</th>
                                 <th>Name</th>
+                                <th>Profile Photo</th>
                                 <th>Email</th>
                                 <th>Phone Number</th>
                                 <th>Created At</th>
@@ -28,6 +29,9 @@
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td>{{ $user->name }}</td>
+                                    <td>
+                                        <img src="{{ asset('uploads/profile_photos') }}/{{ $user->profile_photo }}" alt="no photo found" class="w-50">
+                                    </td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->phone_number }}</td>
                                     <td>{{ $user->created_at }}</td>

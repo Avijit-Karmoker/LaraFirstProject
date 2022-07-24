@@ -16,9 +16,9 @@
 	z-index: 1;
 	margin-top: -40px;
 	margin-right: 10px;
-	
+
 	@include respond('tab-land') {
-		
+
 	}
 	@include respond('phone') {
 		width: 80px;
@@ -42,8 +42,8 @@
 			width: 80px;
 			right: calc(50% - 40px);
 			top: -100px;
-			
-			
+
+
 		}
 	}
 }
@@ -107,7 +107,7 @@
                     font-size: 1.20px;
                 }
             }
-            
+
         }
     }
 }
@@ -132,7 +132,7 @@
 			}
 
         }
-        
+
     }
 }
 .profile-info{
@@ -161,10 +161,10 @@
         font-weight: 400;
         margin: 15px 0;
     }
-    
-}  
+
+}
 .profile-uoloaded-post{
-    
+
 	.post-title{
 		h3{
 			font-size: 24px;

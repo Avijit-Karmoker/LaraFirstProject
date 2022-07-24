@@ -732,14 +732,18 @@
 							</li>
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown">
-                                    <img src="{{ asset('dashboard_assets') }}/images/profile/17.jpg" width="20" alt=""/>
+                                    @if (auth()->user()->profile_photo)
+                                        <img src="{{ asset('uploads/profile_photos') }}/{{ auth()->user()->profile_photo }}" class="img-fluid rounded-circle" alt="">
+                                    @else
+                                        <img src="{{ asset('dashboard_assets') }}/images/profile/default_profile_photo.png" class="img-fluid rounded-circle" alt="">
+                                    @endif
 									<div class="header-info">
 										<span class="text-black"><strong>{{ auth()->user()->name }}</strong></span>
 										<p class="fs-12 mb-0">Super Admin</p>
 									</div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.html" class="dropdown-item ai-icon">
+                                    <a href="{{ route('profile') }}" class="dropdown-item ai-icon">
                                         <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                         <span class="ml-2">Profile </span>
                                     </a>
