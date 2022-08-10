@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Team;
 use Carbon\Carbon;
@@ -10,19 +12,20 @@ class FrontendController extends Controller
 {
     function index()
     {
-        return view('welcome');
+        return view('frontend.index', [
+            'categories' => Category::all(),
+            'brand_images' => Brand::all()
+        ]);
     }
 
     function about()
     {
-        return view('about');
+        return view('frontend.about');
     }
 
     function contact()
     {
-        $name = "Ovijit";
-        $age = 30;
-        return view('contact', compact('name', 'age'));
+        return view('frontend.contact');
     }
 
     function team()

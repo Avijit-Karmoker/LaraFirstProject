@@ -25,9 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home', [
-            'teams' => Team::all(),
-        ]);
+        if (auth()->user()->role == 'customer') {
+            return view('frontend.customer.dashboard');
+        } else {
+            return view('home', [
+                'teams' => Team::all(),
+            ]);
+        }
     }
 
     public function users()

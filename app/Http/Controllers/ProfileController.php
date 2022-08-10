@@ -41,6 +41,23 @@ class ProfileController extends Controller
         return back();
     }
 
+    public function cover_photo_upload(Request $request)
+    {
+        $request->validate([
+            'cover_photo' => 'required|image',
+        ]);
+
+        $extention = $request->file('cover_photo')->getClientOriginalExtension();
+        $new_cover_name = auth()->id() . "_" . "cover_photo" . "_" . Carbon::now()->format('Y_m_d') . "." . $extention;
+        $img = Image::make($request->file('cover_photo'))->resize(1600, 451);
+        $img->save(base_path('public/uploads/cover_photos/' . $new_cover_name), 80);
+
+        User::find(auth()->id())->update([
+            'cover_photo' => $new_cover_name
+        ]);
+        return back();
+    }
+
     public function change_password(Request $request)
     {
         $request->validate([

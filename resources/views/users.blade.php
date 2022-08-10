@@ -21,6 +21,7 @@
                                 <th>Profile Photo</th>
                                 <th>Email</th>
                                 <th>Phone Number</th>
+                                <th>Role</th>
                                 <th>Created At</th>
                             </tr>
                         </thead>
@@ -34,6 +35,7 @@
                                     </td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->phone_number }}</td>
+                                    <td>{{ $user->role }}</td>
                                     <td>{{ $user->created_at }}</td>
                                 </tr>
                             @endforeach

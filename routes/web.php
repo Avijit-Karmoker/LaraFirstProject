@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{FrontendController, HomeController, ProfileController};
+use App\Http\Controllers\{BrandController, CategoryController, CustomerController, FrontendController, HomeController, ProfileController};
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Auth;
 */
 
 //FrontendController
-Route::get('/', [FrontendController::class, 'index']);
-Route::get('about', [FrontendController::class, 'about']);
-Route::get('contact', [FrontendController::class, 'contact']);
+Route::get('/', [FrontendController::class, 'index'])->name('/');
+Route::get('about-us', [FrontendController::class, 'about'])->name('about');
+Route::get('contact-us', [FrontendController::class, 'contact'])->name('contact');
 Route::get('team', [FrontendController::class, 'team']);
 Route::post('team/insert', [FrontendController::class, 'teaminsert']);
 Route::get('team/softdelete/{id}', [FrontendController::class, 'teamSoftDelete']);
@@ -36,6 +36,18 @@ Route::get('/users', [HomeController::class, 'users'])->name('users');
 // ProfileController
 Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
 Route::post('/profile/photo/update', [ProfileController::class, 'profile_photo_upload'])->name('profile/photo/update');
+Route::post('/cover/photo/update', [ProfileController::class, 'cover_photo_upload'])->name('cover/photo/update');
 Route::post('change/password', [ProfileController::class, 'change_password'])->name('change/password');
 Route::get('/send/verfication/code', [ProfileController::class, 'send_verfication_code'])->name('send/verfication/code');
 Route::post('check/code', [ProfileController::class, 'check_code'])->name('check/code');
+
+// CustomerController
+Route::get('/account', [CustomerController::class, 'account'])->name('account');
+Route::post('/customer/register', [CustomerController::class, 'customer_register'])->name('customer.register');
+Route::post('/customer/login', [CustomerController::class, 'customer_login'])->name('customer.login');
+
+// CategoryController
+Route::resource('/category', CategoryController::class);
+
+// BrandController
+Route::resource('/brand', BrandController::class);

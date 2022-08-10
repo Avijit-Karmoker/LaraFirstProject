@@ -17,7 +17,19 @@
             <div class="profile card card-body px-3 pt-3 pb-0">
                 <div class="profile-head">
                     <div class="photo-content">
-                        <div class="cover-photo"></div>
+                        <div class="cover-photo" style="
+                            @if (auth()->user()->cover_photo)
+                                background-image: url('{{ asset('uploads/cover_photos') }}/{{ auth()->user()->cover_photo }}'); height:200px;
+                            @else
+                                background-image: url('{{ asset('dashboard_assets') }}/images/profile/cover.jpg'); height:200px;
+                            @endif
+                        ">
+                            {{-- @if (auth()->user()->cover_photo)
+                                <img src="{{ asset('uploads/cover_photos') }}/{{ auth()->user()->cover_photo }}" class="w-100" alt="" style="height:200px;">
+                            @else
+                                <img src="{{ asset('dashboard_assets') }}/images/profile/cover.jpg" class="w-100" alt="">
+                            @endif --}}
+                        </div>
                     </div>
                     <div class="profile-info">
                         <div class="profile-photo">
@@ -57,7 +69,7 @@
         <div class="col-xl-6 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Profile Edit</h4>
+                    <h4 class="card-title">Profile Photo Upload</h4>
                 </div>
                 <div class="card-body">
                     <div class="basic-form">
@@ -71,8 +83,34 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="col-sm-4">
-                                    <button type="submit" class="btn btn-primary">Change Photo</button>
+                                <div class="col-sm-4 text-right">
+                                    <button type="submit" class="btn btn-primary btn-sm">Change Photo</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Cover Photo Upload</h4>
+                </div>
+                <div class="card-body">
+                    <div class="basic-form">
+                        <form method="POST" action="{{ route('cover/photo/update') }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Profile Photo</label>
+                                <div class="col-sm-5">
+                                    <input type="file" class="form-control" name="cover_photo">
+                                    @error('cover_photo')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-4 text-right">
+                                    <button type="submit" class="btn btn-primary btn-sm">Change Photo</button>
                                 </div>
                             </div>
                         </form>

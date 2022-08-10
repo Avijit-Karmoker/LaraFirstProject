@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Gymove - Fitness Bootstrap Admin Dashboard</title>
+    <title>Admin Dashboard</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('dashboard_assets') }}/images/favicon.png">
 	<link rel="stylesheet" href="{{ asset('dashboard_assets') }}/vendor/chartist/css/chartist.min.css">
@@ -12,6 +12,8 @@
 	<link href="{{ asset('dashboard_assets') }}/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
     <link href="{{ asset('dashboard_assets') }}/css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+
 </head>
 <body>
 
@@ -567,6 +569,7 @@
                             <div class="dashboard_bar">
 								Dashboard
                             </div>
+                            <a class="btn btn-info btn-sm ml-4" href="{{ route('/') }}" target="_blank">Visit Website</a>
                         </div>
                         <ul class="navbar-nav header-right">
 							<li class="nav-item">
@@ -739,7 +742,7 @@
                                     @endif
 									<div class="header-info">
 										<span class="text-black"><strong>{{ auth()->user()->name }}</strong></span>
-										<p class="fs-12 mb-0">Super Admin</p>
+										<p class="fs-12 mb-0">{{ ucfirst(auth()->user()->role) }}</p>
 									</div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
@@ -780,15 +783,43 @@
                     <li>
                         <a href="{{ route('users') }}" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">Users</span>
+							<span class="nav-text">Users List</span>
 						</a>
 					</li>
+                    <li>
+                        <a href="{{ route('category.create') }}" class="ai-icon" aria-expanded="false">
+							<i class="fas fa-marker"></i>
+							<span class="nav-text">Category Add</span>
+						</a>
+					</li>
+                    <li>
+                        <a href="{{ route('category.index') }}" class="ai-icon" aria-expanded="false">
+							<i class="far fa-clipboard"></i>
+							<span class="nav-text">Category List</span>
+						</a>
+					</li>
+
+                    <li>
+                        <a href="{{ route('brand.index') }}" class="ai-icon" aria-expanded="false">
+                            <i class="far fa-images"></i>
+                            <span class="nav-text">Brand Image List</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('brand.create') }}" class="ai-icon" aria-expanded="false">
+                            <i class="far fa-file-image"></i>
+                            <span class="nav-text">Brand Image Add</span>
+                        </a>
+                    </li>
+
                     <li>
                         <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-381-layer-1"></i>
 							<span class="nav-text">Reserve</span>
 						</a>
                     </li>
+
                 </ul>
 
 				<div class="copyright">
@@ -855,6 +886,9 @@
 
 	<!-- Dashboard 1 -->
 	<script src="{{ asset('dashboard_assets') }}/js/dashboard/dashboard-1.js"></script>
+
+    <script src="https://kit.fontawesome.com/014d701e1b.js" crossorigin="anonymous"></script>
+
 	<script>
 		function carouselReview(){
 			/*  testimonial one function by = owl.carousel.js */
