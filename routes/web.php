@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [FrontendController::class, 'index'])->name('/');
 Route::get('about-us', [FrontendController::class, 'about'])->name('about');
 Route::get('contact-us', [FrontendController::class, 'contact'])->name('contact');
+Route::post('contact-us', [FrontendController::class, 'contact_post'])->name('contact.post');
 Route::get('team', [FrontendController::class, 'team']);
 Route::post('team/insert', [FrontendController::class, 'teaminsert']);
 Route::get('team/softdelete/{id}', [FrontendController::class, 'teamSoftDelete']);
@@ -51,3 +52,5 @@ Route::resource('/category', CategoryController::class);
 
 // BrandController
 Route::resource('/brand', BrandController::class);
+Route::post('/brand/list', [BrandController::class, 'list'])->name('brand_list');
+

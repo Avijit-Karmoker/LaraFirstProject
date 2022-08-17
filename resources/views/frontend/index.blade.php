@@ -789,13 +789,16 @@
     <div class="brand_section pb-0">
         <div class="container">
             <div class="brand_carousel">
-                <div class="slider_item">
-                    <a class="product_brand_logo" href="#!">
-                        <img src="{{ asset('frontend_assets') }}/images/brand/brand_1.png" alt="image_not_found">
-                        <img src="{{ asset('frontend_assets') }}/images/brand/brand_1.png" alt="image_not_found">
-                    </a>
-                </div>
+                @forelse ($brand_images as $brand_image)
+                    <div class="slider_item">
+                        <a class="product_brand_logo" href="#!">
+                            <img src="{{ asset('/uploads/brand_images') }}/{{ $brand_image->brand_images }}" alt="image_not_found">
+                            <img src="{{ asset('/uploads/brand_images') }}/{{ $brand_image->brand_images }}" alt="image_not_found">
+                        </a>
+                    </div>
+                @empty
 
+                @endforelse
             </div>
         </div>
     </div>

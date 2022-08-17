@@ -14,15 +14,16 @@
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
                         <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" name="email" id="email" aria-describedby="helpId" placeholder="Your email">
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
 
                         <button type="submit" class="btn btn-secondary mt-3 btn-sm">Send Password Reset Link</button>
                     </form>
-                    @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
             </fieldset>
         </div>

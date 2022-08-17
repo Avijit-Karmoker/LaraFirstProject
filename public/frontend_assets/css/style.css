@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* table of content - start
 ================================================== */
-/* 
+/*
 * Project Name   :  Stowaa -  Ecommerce HTML Template
 * File           :  CSS Base
 * Version        :  1.0.0
@@ -1310,7 +1310,7 @@ hr {
 /* main menu - start */
 @media screen and (min-width: 992px) {
   .main_menu_list {
-    padding-left: 32px;
+    padding-left: 24px;
   }
 }
 .main_menu_list > li {
@@ -8243,7 +8243,7 @@ hr {
 }
 
 /* 4 - Responsive For Mobile & Tablet Devices
-================================================== 
+==================================================
 * Project Name   :  Stowaa -  Ecommerce HTML Template
 * File           :  CSS Base
 * Version        :  1.0.0
@@ -8251,7 +8251,7 @@ hr {
 * Author         :  WP Studio
 * Developer		 :  Avi Aminov
 *	css code for responsive layout To make Responsive
-================================================== 
+==================================================
 */
 /* media screen and (max-width: 1440px) - start
 ================================================== */

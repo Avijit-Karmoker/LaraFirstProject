@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMessage;
 use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Team;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
@@ -14,7 +16,7 @@ class FrontendController extends Controller
     {
         return view('frontend.index', [
             'categories' => Category::all(),
-            'brand_images' => Brand::all()
+            'brand_images' => Brand::limit(3)->get(),
         ]);
     }
 
@@ -141,5 +143,11 @@ class FrontendController extends Controller
             Team::onlyTrashed()->where('id', $id)->restore();
             return back();
         }
+    }
+
+    function contact_post(Request $request)
+    {
+        Mail::to('bergthegold622@gmail.com')->send(new ContactMessage($request->except('_token')));
+        return back();
     }
 }

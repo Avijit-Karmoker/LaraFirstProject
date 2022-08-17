@@ -99,4 +99,9 @@ class BrandController extends Controller
     {
         //
     }
+
+    public function list(Request $request)
+    {
+        return $request;
+    }
 }

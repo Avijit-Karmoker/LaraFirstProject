@@ -177,7 +177,7 @@
                             </div>
                         </div>
 
-                        <div class="col col-md-6">
+                        <div class="col col-md-5">
                             <nav class="main_menu navbar navbar-expand-lg">
                                 <div class="main_menu_inner collapse navbar-collapse" id="main_menu_dropdown">
                                     <button type="button" class="offcanvas_close">
@@ -195,7 +195,7 @@
                             <div class="offcanvas_overlay"></div>
                         </div>
 
-                        <div class="col col-md-3">
+                        <div class="col col-md-4">
                             <ul class="header_icons_group ul_li_right">
                                 @guest
                                 <li>
