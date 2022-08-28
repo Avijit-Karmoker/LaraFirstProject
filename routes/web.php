@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\{BrandController, CategoryController, CustomerController, FrontendController, HomeController, ProfileController};
+use App\Http\Controllers\{BrandController, CategoryController, CustomerController, FrontendController, HomeController, ProfileController, VendorController};
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,11 +30,12 @@ Route::post('team/edit/post/{id}', [FrontendController::class, 'teamEditPost']);
 Route::get('team/restore/{id}', [FrontendController::class, 'teamRestore']);
 Route::get('team/delete/{id}', [FrontendController::class, 'teamDelete']);
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 //HomeController
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth', 'verified');
 Route::get('/users', [HomeController::class, 'users'])->name('users');
+Route::post('/add/users', [HomeController::class, 'add_user'])->name('add_user');
 
 // ProfileController
 Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
@@ -54,3 +57,27 @@ Route::resource('/category', CategoryController::class);
 Route::resource('/brand', BrandController::class);
 Route::post('/brand/list', [BrandController::class, 'list'])->name('brand_list');
 
+
+//Email verification Notice
+Route::get('/email/verify', function () {
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+//Vendor Regestration
+
+Route::get('/vendor/regestration', [VendorController::class, 'vendor_regestration'])->name('vendor.regestration');
+Route::post('/vendor/regestration', [VendorController::class, 'vendor_regestration_post'])->name('vendor.regestration.post');
+Route::get('/vendor/login', [VendorController::class, 'vendor_login'])->name('vendor.login');
+Route::Post('/vendor/login', [VendorController::class, 'vendor_login_post'])->name('vendor.login.post');

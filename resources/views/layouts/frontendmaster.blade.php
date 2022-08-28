@@ -85,7 +85,7 @@
                             </ul>
                         </div>
                         <div class="col col-md-6">
-                            <p class="header_hotline">Call us toll free: <strong>+1888 234 5678</strong></p>
+                            <a class="header_hotline" href="{{ route('vendor.regestration') }}">Vendor Regestration</a>
                         </div>
                     </div>
                 </div>

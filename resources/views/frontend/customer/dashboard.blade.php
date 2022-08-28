@@ -29,7 +29,9 @@
                 <div class="col-lg-9">
                     <div class="tab-content bg-light p-3" id="v-pills-tabContent">
                         <div class="tab-pane fade show active text-center" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        {{-- @if((auth()->user()->created_at->diffInHours(\Carbon\Carbon::now())) < 1) --}}
                             <h5>Welcome to Account</h5>
+                        {{-- @endif --}}
                         </div>
                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                             <h5 class="text-center pb-3">Account Details</h5>

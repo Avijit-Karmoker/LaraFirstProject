@@ -21,7 +21,8 @@ class CustomerController extends Controller
             'email' => 'unique:users|email',
             'password' => 'min:8',
         ]);
-        User::insert([
+
+        $id = User::insertGetId([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
@@ -29,7 +30,9 @@ class CustomerController extends Controller
             'role' => 'customer',
             'created_at' => Carbon::now(),
         ]);
-        return back()->with('account_created', 'Your account has been created successfully!');
+
+        User::find($id)->sendEmailVerificationNotification();
+        return back()->with('account_created', 'Your account has been created successfully! A verification email send to your mail successfully.');
     }
 
     public function customer_login(Request $request)
