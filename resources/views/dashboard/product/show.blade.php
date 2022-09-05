@@ -1,4 +1,4 @@
-@extends('layouts.dashboardmaster')
+@extends('layouts.dashboardmaster');
 
 @section('content')
 <!--**********************************
@@ -66,11 +66,11 @@
 <!--**********************************
     Content body end
 ***********************************-->
+@endsection
 @section('footer-script')
     <script>
         $(document).ready(function () {
             $('#category-table').DataTable();
         });
     </script>
-@endsection
 @endsection

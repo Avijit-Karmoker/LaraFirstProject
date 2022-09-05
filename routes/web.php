@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{BrandController, CategoryController, CustomerController, FrontendController, HomeController, ProfileController, VendorController};
+use App\Http\Controllers\{BrandController, CategoryController, CustomerController, FrontendController, HomeController, ProductController, ProfileController, VendorController};
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,8 +34,8 @@ Auth::routes(['register' => false]);
 
 //HomeController
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth', 'verified');
-Route::get('/users', [HomeController::class, 'users'])->name('users');
 Route::post('/add/users', [HomeController::class, 'add_user'])->name('add_user');
+Route::post('/vendor/action/change/{id}', [HomeController::class, 'vendor_action_change'])->name('vendor.action.change');
 
 // ProfileController
 Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
@@ -49,14 +49,6 @@ Route::post('check/code', [ProfileController::class, 'check_code'])->name('check
 Route::get('/account', [CustomerController::class, 'account'])->name('account');
 Route::post('/customer/register', [CustomerController::class, 'customer_register'])->name('customer.register');
 Route::post('/customer/login', [CustomerController::class, 'customer_login'])->name('customer.login');
-
-// CategoryController
-Route::resource('/category', CategoryController::class);
-
-// BrandController
-Route::resource('/brand', BrandController::class);
-Route::post('/brand/list', [BrandController::class, 'list'])->name('brand_list');
-
 
 //Email verification Notice
 Route::get('/email/verify', function () {
@@ -76,8 +68,20 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 //Vendor Regestration
-
 Route::get('/vendor/regestration', [VendorController::class, 'vendor_regestration'])->name('vendor.regestration');
 Route::post('/vendor/regestration', [VendorController::class, 'vendor_regestration_post'])->name('vendor.regestration.post');
 Route::get('/vendor/login', [VendorController::class, 'vendor_login'])->name('vendor.login');
 Route::Post('/vendor/login', [VendorController::class, 'vendor_login_post'])->name('vendor.login.post');
+
+//Middleware
+Route::middleware(['admin_rolechecker'])->group(function () {
+    //HomeController
+    Route::get('/users', [HomeController::class, 'users'])->name('users');
+    // CategoryController
+    Route::resource('/category', CategoryController::class);
+    // BrandController
+    Route::resource('/brand', BrandController::class);
+    Route::post('/brand/list', [BrandController::class, 'list'])->name('brand_list');
+});
+
+Route::resource('/product', ProductController::class);

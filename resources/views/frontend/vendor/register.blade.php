@@ -24,7 +24,7 @@
 
                 <ul class="nav register_tabnav ul_li_center" role="tablist">
                     <li role="presentation">
-                        <button class="active" data-bs-toggle="tab" data-bs-target="#signup_tab" type="button" role="tab" aria-controls="signup_tab" aria-selected="false">Vendor Register</button>
+                        <h3 class="text-center" style="color: #F02757">Vendor Register</h3>
                     </li>
                 </ul>
 
@@ -121,6 +121,10 @@
                                 <button type="submit" class="btn btn_secondary">Register</button>
                             </div>
                         </form>
+                        <h6 class="form_item_wrap mt-2">
+                            Already have an account?
+                            <a href="{{ route('vendor.login') }}">Login here</a>.
+                        </h6>
                     </div>
                 </div>
             </div>

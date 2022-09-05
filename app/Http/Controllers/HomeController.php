@@ -41,8 +41,21 @@ class HomeController extends Controller
     public function users()
     {
         return view('users', [
-            'users' => User::where('role', 'admin')->get(),
+            'users' => User::all(),
         ]);
+    }
+
+    public function vendor_action_change($id)
+    {
+        $user = User::find($id);
+        if ($user->action == false) {
+            $user->action = true;
+        }
+        else {
+            $user->action = false;
+        }
+        $user->save();
+        return back();
     }
 
     public function add_user(Request $request)

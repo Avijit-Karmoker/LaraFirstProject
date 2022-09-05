@@ -1,4 +1,4 @@
-@extends('layouts.dashboardmaster')
+@extends('layouts.dashboardmaster');
 
 @section('content')
 <!--**********************************
@@ -8,7 +8,7 @@
     <div class="page-titles">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route("home") }}">Dashboard</a></li>
-            <li class="breadcrumb-item active"><a href="{{ route('category.index') }}">Category</a></li>
+            <li class="breadcrumb-item active"><a href="{{ route('product.index') }}">List Product</a></li>
         </ol>
     </div>
     <!-- row -->
@@ -16,34 +16,32 @@
         <div class="col-md-6 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Profile Photo Upload</h4>
+                    <h4 class="card-title">Product List</h4>
                 </div>
                 <div class="card-body">
                     <div class="basic-form">
                         <table class="table table-bordered" id="category-table" style="border-top: none; border-bottom: none;">
                             <thead>
                                 <tr>
-                                    <th>Category Name</th>
+                                    <th>Product Name</th>
+                                    <th>Category Id</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($categories as $category)
+                                @forelse ($products as $product)
                                     <tr>
-                                        <td>{{ $category->category_name }}</td>
-                                        {{-- <td>{{ $category->category_slug }}</td>
-                                        <td>
-                                            <img style="width: 35%; height: 130px;" src="{{ asset('uploads/category_photos') }}/{{ $category->category_photo }}" alt="not found">
-                                        </td>
-                                        <td>{{ $category->created_at }}</td> --}}
-                                        <td>
-                                            <a href="{{ route('category.show', $category->id) }}" class="btn btn-sm btn-secondary">Details</a>
-                                            <a href="{{ route('category.edit', $category->id) }}" class="btn btn-sm btn-info">Edit</a>
-                                            <form action="{{ route('category.destroy', $category->id) }}" method="POST">
+                                        <td>{{ $product->product_name }}</td>
+                                        <td>{{ $product->category_id }}</td>
+
+                                        <td> -----
+                                            {{-- <a href="{{ route('product.show', $product->id) }}" class="btn btn-sm btn-secondary">Details</a>
+                                            <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-info">Edit</a>
+                                            <form action="{{ route('product.destroy', $product->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger mt-2">Delete</button>
-                                            </form>
+                                            </form> --}}
                                         </td>
                                     </tr>
                                 @empty

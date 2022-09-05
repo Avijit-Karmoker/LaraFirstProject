@@ -13,6 +13,11 @@
     <link href="{{ asset('dashboard_assets') }}/css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+    <!-- Datatable -->
+    <link href="{{ asset('dashboard_assets') }}/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -780,45 +785,55 @@
 							<span class="nav-text">Dashboard</span>
 						</a>
                     </li>
-                    <li>
-                        <a href="{{ route('users') }}" class="ai-icon" aria-expanded="false">
-							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">Users List</span>
-						</a>
-					</li>
-                    <li>
-                        <a href="{{ route('category.create') }}" class="ai-icon" aria-expanded="false">
-							<i class="fas fa-marker"></i>
-							<span class="nav-text">Category Add</span>
-						</a>
-					</li>
-                    <li>
-                        <a href="{{ route('category.index') }}" class="ai-icon" aria-expanded="false">
-							<i class="far fa-clipboard"></i>
-							<span class="nav-text">Category List</span>
-						</a>
-					</li>
+                    @if (auth()->user()->role == 'admin')
+                        <li>
+                            <a href="{{ route('users') }}" class="ai-icon" aria-expanded="false">
+                                <i class="flaticon-381-settings-2"></i>
+                                <span class="nav-text">Users List</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('category.create') }}" class="ai-icon" aria-expanded="false">
+                                <i class="fas fa-marker"></i>
+                                <span class="nav-text">Category Add</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('category.index') }}" class="ai-icon" aria-expanded="false">
+                                <i class="far fa-clipboard"></i>
+                                <span class="nav-text">Category List</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('brand.index') }}" class="ai-icon" aria-expanded="false">
+                                <i class="far fa-images"></i>
+                                <span class="nav-text">Brand Image List</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('brand.create') }}" class="ai-icon" aria-expanded="false">
+                                <i class="far fa-file-image"></i>
+                                <span class="nav-text">Brand Image Add</span>
+                            </a>
+                        </li>
+                    @endif
 
-                    <li>
-                        <a href="{{ route('brand.index') }}" class="ai-icon" aria-expanded="false">
-                            <i class="far fa-images"></i>
-                            <span class="nav-text">Brand Image List</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="{{ route('brand.create') }}" class="ai-icon" aria-expanded="false">
-                            <i class="far fa-file-image"></i>
-                            <span class="nav-text">Brand Image Add</span>
-                        </a>
-                    </li>
-
+                    @if (auth()->user()->role == 'vendor')
                     <li>
                         <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-381-layer-1"></i>
-							<span class="nav-text">Reserve</span>
+							<span class="nav-text">Product</span>
 						</a>
+                        <ul aria-expanded="false">
+                            <li>
+                                <a href="{{ route('product.create') }}">Add Product</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('product.index') }}">Product List</a>
+                            </li>
+                        </ul>
                     </li>
+                    @endif
 
                 </ul>
 
@@ -838,38 +853,10 @@
             <!-- row -->
             @yield('content')
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-
-        <!--**********************************
-            Footer start
-        ***********************************-->
-
-
-
-
-        <!--**********************************
-            Footer end
-        ***********************************-->
-
-		<!--**********************************
-           Support ticket button start
-        ***********************************-->
-
-        <!--**********************************
-           Support ticket button end
-        ***********************************-->
 
 
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
 
-    <!--**********************************
-        Scripts
-    ***********************************-->
     <!-- Required vendors -->
     <script src="{{ asset('dashboard_assets') }}/vendor/global/global.min.js"></script>
 	<script src="{{ asset('dashboard_assets') }}/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
@@ -888,6 +875,13 @@
 	<script src="{{ asset('dashboard_assets') }}/js/dashboard/dashboard-1.js"></script>
 
     <script src="https://kit.fontawesome.com/014d701e1b.js" crossorigin="anonymous"></script>
+
+    <!-- Datatable -->
+    <script src="{{ asset('dashboard_assets') }}/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('dashboard_assets') }}/js/plugins-init/datatables.init.js"></script>
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 	<script>
 		function carouselReview(){
@@ -928,6 +922,8 @@
 				carouselReview();
 			}, 1000);
 		});
-	</script>
+
+        </script>
+        @yield('footer-script')
 </body>
 </html>
