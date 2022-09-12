@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\ContactMessage;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Team;
 use Carbon\Carbon;
@@ -15,6 +16,7 @@ class FrontendController extends Controller
     function index()
     {
         return view('frontend.index', [
+            'products' => Product::latest()->limit(6)->get(),
             'categories' => Category::all(),
             'brand_images' => Brand::limit(3)->get(),
         ]);
@@ -23,6 +25,13 @@ class FrontendController extends Controller
     function about()
     {
         return view('frontend.about');
+    }
+
+    function product_details($id)
+    {
+        $product = Product::findOrFail($id);
+        $related_products = Product::where('category_id', $product->category_id)->where('id', '!=', $id)->get();
+        return view('frontend.product_details', compact('product', 'related_products'));
     }
 
     function contact()

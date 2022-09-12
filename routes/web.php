@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{BrandController, CategoryController, CustomerController, FrontendController, HomeController, ProductController, ProfileController, VendorController};
+use App\Http\Controllers\{BrandController, CategoryController, CustomerController, FrontendController, HomeController, ProductController, ProfileController, VariationController, VendorController};
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 
 //FrontendController
 Route::get('/', [FrontendController::class, 'index'])->name('/');
+Route::get('/product/details/{id}', [FrontendController::class, 'product_details'])->name('product.details');
 Route::get('about-us', [FrontendController::class, 'about'])->name('about');
 Route::get('contact-us', [FrontendController::class, 'contact'])->name('contact');
 Route::post('contact-us', [FrontendController::class, 'contact_post'])->name('contact.post');
@@ -84,4 +85,8 @@ Route::middleware(['admin_rolechecker'])->group(function () {
     Route::post('/brand/list', [BrandController::class, 'list'])->name('brand_list');
 });
 
+//ProductController
 Route::resource('/product', ProductController::class);
+
+// VariationController
+Route::resource('/variation', VariationController::class);

@@ -10,4 +10,8 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
+
+    function relationshipwithcategory(){
+        return $this->hasOne(Category::class, 'id', 'category_id');
+    }
 }

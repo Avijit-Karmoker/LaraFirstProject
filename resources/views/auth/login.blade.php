@@ -31,7 +31,7 @@
 
                                         <div class="form-group">
                                             <label class="mb-1 text-white"><strong>Email</strong></label>
-                                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Your email">
+                                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="admin@gmail.com">
 
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -42,7 +42,7 @@
 
                                         <div class="form-group">
                                             <label class="mb-1 text-white"><strong>Password</strong></label>
-                                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
+                                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="123456789">
 
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">

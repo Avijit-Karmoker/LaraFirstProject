@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Admin Dashboard</title>
+    <title>Dashboard</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('dashboard_assets') }}/images/favicon.png">
 	<link rel="stylesheet" href="{{ asset('dashboard_assets') }}/vendor/chartist/css/chartist.min.css">
@@ -19,6 +19,7 @@
     <!-- Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
+    @livewireStyles
 </head>
 <body>
 
@@ -45,7 +46,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
+            <a href="{{ route('home') }}" class="brand-logo">
                 <img class="logo-abbr" src="./{{ asset('dashboard_assets') }}/images/logo.png" alt="">
                 <img class="logo-compact" src="{{ asset('dashboard_assets') }}/images/logo-text.png" alt="">
                 <img class="brand-title" src="{{ asset('dashboard_assets') }}/images/logo-text.png" alt="">
@@ -833,6 +834,12 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a class="ai-icon" href="{{ route('variation.index') }}" aria-expanded="false">
+							<i class="flaticon-381-layer-1"></i>
+							<span class="nav-text">Variation</span>
+						</a>
+                    </li>
                     @endif
 
                 </ul>
@@ -883,11 +890,15 @@
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+    <!-- Sweet Alart 2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 	<script>
-		function carouselReview(){
-			/*  testimonial one function by = owl.carousel.js */
+        function carouselReview(){
+            /*  testimonial one function by = owl.carousel.js */
 			jQuery('.testimonial-one').owlCarousel({
-				loop:true,
+                loop:true,
 				autoplay:true,
 				margin:30,
 				nav:false,
@@ -895,35 +906,36 @@
 				left:true,
 				navText: ['<i class="fa fa-chevron-left" aria-hidden="true"></i>', '<i class="fa fa-chevron-right" aria-hidden="true"></i>'],
 				responsive:{
-					0:{
-						items:1
+                    0:{
+                        items:1
 					},
 					484:{
-						items:2
+                        items:2
 					},
 					882:{
-						items:3
+                        items:3
 					},
 					1200:{
-						items:2
+                        items:2
 					},
 
 					1540:{
-						items:3
+                        items:3
 					},
 					1740:{
-						items:4
+                        items:4
 					}
 				}
 			})
 		}
 		jQuery(window).on('load',function(){
-			setTimeout(function(){
-				carouselReview();
+            setTimeout(function(){
+                carouselReview();
 			}, 1000);
 		});
 
         </script>
         @yield('footer-script')
+        @livewireScripts
 </body>
 </html>

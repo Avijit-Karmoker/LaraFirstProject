@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('category_name');
             $table->longText('category_slug')->nullable();
             $table->string('category_photo');
+            $table->string('category_color')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

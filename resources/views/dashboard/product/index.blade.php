@@ -23,7 +23,9 @@
                         <table class="table table-bordered" id="category-table" style="border-top: none; border-bottom: none;">
                             <thead>
                                 <tr>
+                                    <th>Product Photo</th>
                                     <th>Product Name</th>
+                                    <th>Product Regular Price</th>
                                     <th>Category Id</th>
                                     <th>Action</th>
                                 </tr>
@@ -31,8 +33,24 @@
                             <tbody>
                                 @forelse ($products as $product)
                                     <tr>
+                                        <td>
+                                            {{-- {{ $product->thumbnail }} --}}
+                                            {{-- <img src="{{ Avatar::create($product->product_name)->setShape('square') }}" /> --}}
+                                            @if ($product->thumbnail)
+                                                <img src="{{ asset('uploads/product_thumbnail') }}/{{ $product->thumbnail }}" alt="Photo not found" width="100">
+                                            @else
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="Photo not found" width="100">
+                                            @endif
+                                        </td>
                                         <td>{{ $product->product_name }}</td>
-                                        <td>{{ $product->category_id }}</td>
+                                        <td><span style="font-weight: 700">৳</span>{{ $product->regular_price }}</td>
+                                        <td>
+                                             <span class="badge" style="background: {{ $product->relationshipwithcategory->category_color }};
+                                                @if($product->relationshipwithcategory->category_color == '#000000' ) color: #fff @endif">
+                                                {{ $product->relationshipwithcategory->category_name }}
+                                                {{-- {{ App\Models\Category::find($product->category_id)->category_name }} --}}
+                                             </span>
+                                        </td>
 
                                         <td> -----
                                             {{-- <a href="{{ route('product.show', $product->id) }}" class="btn btn-sm btn-secondary">Details</a>

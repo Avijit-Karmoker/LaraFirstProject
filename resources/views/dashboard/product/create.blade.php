@@ -17,6 +17,13 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Product Upload</h4>
+                    {{-- @if ($errors->any())
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                    @endif --}}
                 </div>
                 <div class="card-body">
                     <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
@@ -49,7 +56,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Purchase Price</label>
-                                <input type="number" name="purchase_price" class="form-control" placeholder="add category photo">
+                                <input type="number" name="purchase_price" class="form-control" placeholder="Purchase Price">
                                 @error('purchase_price')
                                     <span class="invalid-feedback text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -69,7 +76,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Discounted Price</label>
-                                <input type="number" name="discounted_price" class="form-control" placeholder="discounted price">
+                                <input type="number" name="discounted_price" class="form-control" placeholder="Discounted price">
                                 @error('discounted_price')
                                     <span class="invalid-feedback text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -131,13 +138,39 @@
 <!--**********************************
     Content body end
 ***********************************-->
-
+<script>
+    $(document).ready(function() {
+        Swal.fire('Any fool can use a computer');
+    });
+</script>
 @endsection
 
 @section('footer-script')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#category_dropdown').select2();
-        });
-    </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#category_dropdown').select2();
+    });
+</script>
+@if (session('success'))
+<script>
+    $(document).ready(function() {
+        const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+        })
+
+        Toast.fire({
+        icon: 'success',
+        title: "{{ session('success') }}"
+        })
+    });
+</script>
+@endif
 @endsection

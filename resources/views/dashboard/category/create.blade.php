@@ -54,6 +54,16 @@
                             </div>
 
                             <div class="mb-3">
+                                <label class="form-label">Category Colour</label>
+                                <input type="color" name="category_color">
+                                @error('category_color')
+                                    <span class="invalid-feedback text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
                             <button type="submit" class="btn btn-sm btn-info">Add Category</button>
                             </div>
                         </div>

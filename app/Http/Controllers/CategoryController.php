@@ -72,6 +72,7 @@ class CategoryController extends Controller
             'category_name' => $request->category_name,
             'category_slug' => $slug,
             'category_photo' => $new_category_name,
+            'category_color' => $request->category_color,
             'created_at' => Carbon::now(),
         ]);
         return redirect('category');
@@ -110,6 +111,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)  //update => edit code
     {
+
         Category::find($id)->update([
             'category_name' => $request->category_name,
             'category_slug' => Str::slug($request->category_slug),
