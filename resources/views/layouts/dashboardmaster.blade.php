@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Dashboard</title>
     <!-- Favicon icon -->
+    @livewireStyles
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('dashboard_assets') }}/images/favicon.png">
 	<link rel="stylesheet" href="{{ asset('dashboard_assets') }}/vendor/chartist/css/chartist.min.css">
     <link href="{{ asset('dashboard_assets') }}/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
@@ -19,7 +20,9 @@
     <!-- Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-    @livewireStyles
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
 </head>
 <body>
 
@@ -865,6 +868,7 @@
     </div>
 
     <!-- Required vendors -->
+    @livewireScripts
     <script src="{{ asset('dashboard_assets') }}/vendor/global/global.min.js"></script>
 	<script src="{{ asset('dashboard_assets') }}/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 	<script src="{{ asset('dashboard_assets') }}/vendor/chart.js/Chart.bundle.min.js"></script>
@@ -893,6 +897,8 @@
     <!-- Sweet Alart 2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
 	<script>
         function carouselReview(){
@@ -936,6 +942,5 @@
 
         </script>
         @yield('footer-script')
-        @livewireScripts
 </body>
 </html>

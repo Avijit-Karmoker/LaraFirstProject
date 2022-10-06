@@ -19,8 +19,7 @@ class Addsize extends Component
             'measure' => $this->measure,
             'created_at' => Carbon::now(),
         ]);
-        $this->reset('size');
-        $this->reset('measure');
+        $this->reset(['size', 'measure']);
         session()->flash('success', 'Size successfully added.');
     }
 

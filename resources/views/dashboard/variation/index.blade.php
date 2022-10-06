@@ -17,13 +17,7 @@
             @livewire('variation.addsize')
         </div>
         <div class="col-xl-6 col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Size</h4>
-                </div>
-                <div class="card-body">
-                </div>
-            </div>
+            @livewire('variation.addcolor')
         </div>
     </div>
 </div>

@@ -8,6 +8,7 @@
     <title>Stowaa -  Ecommerce HTML Template</title>
     <link rel="shortcut icon" href="{{ asset('frontend_assets') }}/images/logo/favourite_icon_1.png">
 
+    @livewireStyles
     <!-- fraimwork - css include -->
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend_assets') }}/css/bootstrap.min.css">
 
@@ -204,22 +205,24 @@
                                 @endguest
 
                                 @auth
-                                <li style="margin-right: 0;">
-                                    <a style=" padding-right: 10px;" href="{{ route('home') }}">{{ Str::title(auth()->user()->name) }}</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('home') }}">
-                                        <svg role="img" xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" stroke="#051d43" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title id="personIconTitle">Person</title> <path d="M4,20 C4,17 8,17 10,15 C11,14 8,14 8,9 C8,5.667 9.333,4 12,4 C14.667,4 16,5.667 16,9 C16,14 13,14 14,15 C16,17 20,17 20,20"/> </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <form action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button class="btn btn-danger text-white">
-                                            <i class="fa fa-right-from-bracket"></i>
-                                        </button>
-                                    </form>
-                                </li>
+                                    @if (auth()->user()->role != 'admin')
+                                    <li style="margin-right: 0;">
+                                        <a style=" padding-right: 10px;" href="{{ route('home') }}">{{ Str::title(auth()->user()->name) }}</a>
+                                    </li>
+                                        <li>
+                                            <a href="{{ route('home') }}">
+                                                <svg role="img" xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" stroke="#051d43" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6"> <title id="personIconTitle">Person</title> <path d="M4,20 C4,17 8,17 10,15 C11,14 8,14 8,9 C8,5.667 9.333,4 12,4 C14.667,4 16,5.667 16,9 C16,14 13,14 14,15 C16,17 20,17 20,20"/> </svg>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <form action="{{ route('logout') }}" method="POST">
+                                                @csrf
+                                                <button class="btn btn-danger text-white">
+                                                    <i class="fa fa-right-from-bracket"></i>
+                                                </button>
+                                            </form>
+                                        </li>
+                                    @endif
                                 @endauth
                             </ul>
                         </div>
@@ -432,6 +435,7 @@
     </div>
     <!-- body_wrap - end -->
 
+    @livewireScripts
     <!-- fraimwork - jquery include -->
     <script src="{{ asset('frontend_assets') }}/js/jquery.min.js"></script>
     <script src="{{ asset('frontend_assets') }}/js/popper.min.js"></script>

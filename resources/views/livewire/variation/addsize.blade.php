@@ -25,8 +25,6 @@
                                     <option value="m">m</option>
                                     <option value="cm">cm</option>
                                     <option value="l">l</option>
-                                    <option value="kg">kg</option>
-                                    <option value="g">g</option>
                                 </select>
                             </div>
                         </div>

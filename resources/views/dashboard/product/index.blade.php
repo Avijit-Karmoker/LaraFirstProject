@@ -52,14 +52,19 @@
                                              </span>
                                         </td>
 
-                                        <td> -----
-                                            {{-- <a href="{{ route('product.show', $product->id) }}" class="btn btn-sm btn-secondary">Details</a>
+                                        {{-- <td>
+                                            <a href="{{ route('product.show', $product->id) }}" class="btn btn-sm btn-secondary">Details</a>
                                             <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-info">Edit</a>
                                             <form action="{{ route('product.destroy', $product->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger mt-2">Delete</button>
-                                            </form> --}}
+                                            </form>
+                                        </td> --}}
+                                        <td>
+                                            <a href="{{ route('product.add.inventory', $product->id) }}" class="btn btn-sm btn-info">
+                                                Add inventory
+                                            </a>
                                         </td>
                                     </tr>
                                 @empty

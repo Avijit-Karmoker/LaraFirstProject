@@ -100,55 +100,9 @@
                         @endif
                     </div>
                     <hr>
-
-                    <div class="item_attribute">
-                        <form action="#">
-                            <div class="row">
-                                <div class="col col-md-6">
-                                    <div class="select_option clearfix">
-                                        <h4 class="input_title">Size *</h4>
-                                        <select>
-                                            <option data-display="- Please select -">Choose A Option</option>
-                                            <option value="1">Some option</option>
-                                            <option value="2">Another option</option>
-                                            <option value="3" disabled>A disabled option</option>
-                                            <option value="4">Potato</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col col-md-6">
-                                    <div class="select_option clearfix">
-                                        <h4 class="input_title">Color *</h4>
-                                        <select>
-                                            <option data-display="- Please select -">Choose A Option</option>
-                                            <option value="1">Some option</option>
-                                            <option value="2">Another option</option>
-                                            <option value="3" disabled>A disabled option</option>
-                                            <option value="4">Potato</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="quantity_wrap">
-                            <div class="quantity_input">
-                                <button type="button" class="input_number_decrement">
-                                    <i class="fal fa-minus"></i>
-                                </button>
-                                <input class="input_number" type="text" value="1">
-                                <button type="button" class="input_number_increment">
-                                    <i class="fal fa-plus"></i>
-                                </button>
-                            </div>
-                            <div class="total_price">Total: ৳620.99</div>
-                        </div>
-
-                        <ul class="default_btns_group ul_li">
-                            <li><a class="btn btn_primary addtocart_btn" href="#!">Add To Cart</a></li>
-                        </ul>
-                    </div>
-                </form>
+                    @livewire('productdetails.addtocart', ['product_id' => $product->id])
+                    <hr>
+                </div>
             </div>
         </div>
 
@@ -156,7 +110,7 @@
             <ul class="tabs_nav nav ul_li" role=tablist>
                 <li>
                     <button class="active" data-bs-toggle="tab" data-bs-target="#description_tab" type="button" role="tab" aria-controls="description_tab" aria-selected="true">
-                    Description
+                        Description
                     </button>
                 </li>
                 <li>
