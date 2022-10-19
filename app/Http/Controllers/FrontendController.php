@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ContactMessage;
 use App\Models\Brand;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Inventory;
 use App\Models\Product;
@@ -38,6 +39,11 @@ class FrontendController extends Controller
     function contact()
     {
         return view('frontend.contact');
+    }
+
+    function cart()
+    {
+        return view('frontend.cart');
     }
 
     function team()

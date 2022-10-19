@@ -73,7 +73,7 @@
                                         <div class="flug_wrap">
                                             <img src="{{ asset('frontend_assets') }}/images/flug/flug_uk.png" alt="image_not_found">
                                         </div>
-                                        <select>
+                                        <select class="form-select">
                                             <option data-display="Select Option">Select Your Language</option>
                                             <option value="1" selected>English</option>
                                             <option value="2">Bangla</option>
@@ -106,7 +106,7 @@
                             <form action="#">
                                 <div class="advance_serach">
                                     <div class="select_option mb-0 clearfix">
-                                        <select>
+                                        <select class="form-select ms-2" style="width: 90%;">
                                             <option data-display="All Categories">Select A Category</option>
                                             <option value="1">New Arrival Products</option>
                                             <option value="2">Most Popular Products</option>
@@ -119,7 +119,7 @@
                                     </div>
                                     <div class="form_item">
                                         <input type="search" name="search" placeholder="Search Prudcts...">
-                                        <button type="submit" class="search_btn"><i class="far fa-search"></i></button>
+                                        <button type="submit" class="search_btn"><i class="fas fa-search"></i></button>
                                     </div>
                                 </div>
                             </form>
@@ -139,7 +139,7 @@
                                     <li>
                                         <span class="cart_icon">
                                             <i class="icon icon-ShoppingCart"></i>
-                                            <small class="cart_counter">3</small>
+                                            <small class="cart_counter">{{ cart_count() }}</small>
                                         </span>
                                     </li>
                                </ul>
@@ -293,7 +293,7 @@
                 </li>
             </ul>
             <ul class="btns_group ul_li_block clearfix">
-                <li><a class="btn btn_primary" href="cart.html">View Cart</a></li>
+                <li><a class="btn btn_primary" href="{{ route('cart') }}">View Cart</a></li>
                 <li><a class="btn btn_secondary" href="checkout.html">Checkout</a></li>
             </ul>
         </div>
@@ -455,6 +455,10 @@
     {!! NoCaptcha::renderJs() !!}
 
     <script src="https://kit.fontawesome.com/014d701e1b.js" crossorigin="anonymous"></script>
+
+    <!-- sweetalart2 js -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @yield('footer_scripts')
 
 </body>
 </html>

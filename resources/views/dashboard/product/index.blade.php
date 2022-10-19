@@ -26,6 +26,7 @@
                                     <th>Product Photo</th>
                                     <th>Product Name</th>
                                     <th>Product Regular Price</th>
+                                    <th>Product Discounted Price</th>
                                     <th>Category Id</th>
                                     <th>Action</th>
                                 </tr>
@@ -44,6 +45,7 @@
                                         </td>
                                         <td>{{ $product->product_name }}</td>
                                         <td><span style="font-weight: 700">৳</span>{{ $product->regular_price }}</td>
+                                        <td><span style="font-weight: 700">৳</span>{{ $product->discounted_price }}</td>
                                         <td>
                                              <span class="badge" style="background: {{ $product->relationshipwithcategory->category_color }};
                                                 @if($product->relationshipwithcategory->category_color == '#000000' ) color: #fff @endif">

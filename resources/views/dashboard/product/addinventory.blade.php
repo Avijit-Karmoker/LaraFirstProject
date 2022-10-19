@@ -81,8 +81,8 @@
                                 @endphp
                                 @foreach ($inventories as $inventory)
                                     <tr class="table-primary">
-                                        <td>{{ App\Models\Size::find($inventory->size_id)->size }} {{ App\Models\Size::find($inventory->size_id)->measure }}</td>
-                                        <td>{{ Str::title(App\Models\Color::find($inventory->color_id)->color_name) }} ({{ App\Models\Color::find($inventory->color_id)->color_code }})</td>
+                                        <td>{{ inventory_size($inventory) }}{{ size_measure($inventory) }}</td>
+                                        <td>{{ inventory_color($inventory) }} ({{ color_code($inventory) }})</td>
                                         <td>৳{{ $inventory->color_extra_charge }}</td>
                                         <td>{{ $inventory->quantity }}</td>
                                         <td>৳{{ $inventory->quantity * $product->purchase_price }}</td>

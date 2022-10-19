@@ -48,7 +48,7 @@
                                         <label for="username_input">
                                             <i class="fas fa-user"></i>
                                         </label>
-                                        <input id="username_input" type="email" name="email" placeholder="Your email">
+                                        <input id="username_input" type="email" name="email" value="jatiludatu@mailinator.com">
                                     </div>
                                 </div>
 
@@ -58,7 +58,7 @@
                                         <label for="password_input">
                                             <i class="fas fa-lock"></i>
                                         </label>
-                                        <input id="password_input" type="password" name="password" placeholder="Password">
+                                        <input id="password_input" type="password" name="password" value="Pa$$w0rd!">
                                     </div>
                                     <div class="checkbox_item">
                                         <input id="remember_checkbox" type="checkbox">

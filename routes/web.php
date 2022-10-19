@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{BrandController, CategoryController, CustomerController, FrontendController, HomeController, ProductController, ProfileController, VariationController, VendorController};
+use App\Http\Controllers\{BrandController, CategoryController, CouponController, CustomerController, FrontendController, HomeController, ProductController, ProfileController, VariationController, VendorController};
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [FrontendController::class, 'index'])->name('/');
 Route::get('/product/details/{id}', [FrontendController::class, 'product_details'])->name('product.details');
 Route::get('about-us', [FrontendController::class, 'about'])->name('about');
+Route::get('/cart', [FrontendController::class, 'cart'])->name('cart');
 Route::get('contact-us', [FrontendController::class, 'contact'])->name('contact');
 Route::post('contact-us', [FrontendController::class, 'contact_post'])->name('contact.post');
 Route::get('team', [FrontendController::class, 'team']);
@@ -92,3 +93,6 @@ Route::post('/product/add/inventory/{product}', [ProductController::class, 'addi
 
 // VariationController
 Route::resource('/variation', VariationController::class);
+
+//CouponController
+Route::resource('coupon', CouponController::class);

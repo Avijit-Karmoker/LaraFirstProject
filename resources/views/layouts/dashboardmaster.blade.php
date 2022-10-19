@@ -23,6 +23,11 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
+    <style>
+        .borders {
+            border: 1px solid #d3d3e6;
+        }
+    </style>
 </head>
 <body>
 
@@ -841,6 +846,12 @@
                         <a class="ai-icon" href="{{ route('variation.index') }}" aria-expanded="false">
 							<i class="flaticon-381-layer-1"></i>
 							<span class="nav-text">Variation</span>
+						</a>
+                    </li>
+                    <li>
+                        <a class="ai-icon" href="{{ route('coupon.index') }}" aria-expanded="false">
+							<i class="flaticon-381-layer-1"></i>
+							<span class="nav-text">Coupon</span>
 						</a>
                     </li>
                     @endif
