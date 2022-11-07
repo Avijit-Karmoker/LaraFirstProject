@@ -106,7 +106,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Additional Discription</label>
-                                <textarea rows="4" name="additional_discription" class="form-control" placeholder="additional discription"></textarea>
+                                <textarea rows="4" name="additional_discription" id="my_summernote" class="form-control" placeholder="additional discription"></textarea>
                                 @error('additional_discription')
                                     <span class="invalid-feedback text-danger" role="alert">
                                         <strong>{{ $message }}</strong>

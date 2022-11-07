@@ -107,15 +107,20 @@
             <div class="cart_btns_wrap">
                 <div class="row">
                     <div class="col col-lg-6">
-                        <form action="#">
-                            <div class="coupon_form form_item mb-0">
-                                <input type="text" name="coupon" placeholder="Coupon Code...">
-                                <button type="submit" class="btn btn_dark">Apply Coupon</button>
-                                <div class="info_icon">
-                                    <i class="fas fa-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Your Info Here"></i>
-                                </div>
+                        <div class="coupon_form form_item mb-0">
+                            <input type="text" wire:model="coupon_name" placeholder=" @if (session('coupon_info'))৳{{ session('coupon_info')->coupon_discount_amount }} @else Enter your coupon here @endif ">
+                            <button wire:click="apply_coupon({{ $carts->first()->vendor_id }},{{ $subtotal }})" type="submit" class="btn btn_dark">Apply Coupon</button>
+                            <div class="info_icon">
+                                <i class="fas fa-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Your Info Here"></i>
                             </div>
-                        </form>
+                        </div>
+                        <div>
+                            @if ($coupon_error)
+                                <div class="alert text-danger mb-0 pb-0">
+                                    {{ $coupon_error }}
+                                </div>
+                            @endif
+                        </div>
                     </div>
 
                     <div class="col col-lg-6">
@@ -123,9 +128,13 @@
                             {{-- <li><a class="btn border_black" href="#!">Update Cart</a></li> --}}
                             <li>
                                 @if ($error)
-                                    <button class="btn btn_dark" disabled>Prceed To Checkout</button>
+                                    <button class="btn btn_dark" disabled>Proceed To Checkout</button>
                                 @else
-                                    <button class="btn btn_dark" href="">Prceed To Checkout</button>
+                                    @if ($shipping_id != 0)
+                                        <a class="btn btn_dark" href="{{ route('checkout') }}">Proceed To Checkout</a>
+                                    @else
+                                        <button class="btn bg-danger">Please select shipping</button>
+                                    @endif
                                 @endif
                             </li>
                         </ul>
@@ -139,14 +148,15 @@
                         <h3 class="wrap_title">Calculate Shipping <span class="icon"><i class="fas fa-arrow-up"></i></span></h3>
                         <form action="#">
                             <div class="select_option clearfix">
-                                <select class="form-select w-50">
-                                    <option value="">Select Your Option</option>
-                                    <option value="1">Inside City</option>
-                                    <option value="2">Outside City</option>
+                                <select class="form-select w-50" wire:model="shipping_dropdown">
+                                    <option value="0">Select Your Option</option>
+                                    @foreach ($shippings as $shipping)
+                                        <option value="{{ $shipping->id }}">{{ $shipping->shipping_type }}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                            <br>
-                            <button type="submit" class="btn btn_primary rounded-pill">Update Total</button>
+                            {{-- <br>
+                            <button type="submit" class="btn btn_primary rounded-pill">Update Total</button> --}}
                         </form>
                     </div>
                 </div>
@@ -160,12 +170,57 @@
                                 <span>৳{{ $subtotal }}</span>
                             </li>
                             <li>
+                                <span>Discount Amount</span>
+                                @if (session('coupon_info'))
+                                    @if(session('coupon_info')->discount_type == 'flat')
+                                        <span class="text-info">৳{{ session('coupon_info')->coupon_discount_amount }} ({{ session('coupon_info')->coupon_name }})</span>
+                                    @else
+                                        <span class="text-info">{{ session('coupon_info')->coupon_discount_amount }}% ({{ session('coupon_info')->coupon_name }})</span>
+                                    @endif
+                                @else
+                                    <span class="text-info">৳0</span>
+                                @endif
+                                {{-- @if($after_discount_subtotal)
+                                    <span>৳{{ $subtotal - $after_discount_subtotal }}</span>
+                                @else
+                                    <span>৳0</span>
+                                @endif --}}
+                            </li>
+                            @if (session('coupon_info'))
+                                <li>
+                                    <span>After Discount</span>
+                                    @if(session('coupon_info')->discount_type == 'flat')
+                                        <span>৳{{ round($subtotal - session('coupon_info')->coupon_discount_amount) }}</span>
+                                        @php
+                                            session(['after_discount' => round($subtotal - session('coupon_info')->coupon_discount_amount)])
+                                        @endphp
+                                    @else
+                                        <span>৳{{ round($subtotal - ((session('coupon_info')->coupon_discount_amount * $subtotal) / 100)) }}</span>
+                                        @php
+                                            session(['after_discount' => round($subtotal - ((session('coupon_info')->coupon_discount_amount * $subtotal) / 100))])
+                                        @endphp
+                                    @endif
+                                </li>
+                            @endif
+                            <li>
                                 <span>Delivery Charge</span>
-                                <span>$5</span>
+                                <span>{{session('shipping_charge')}}</span>
                             </li>
                             <li>
                                 <span>Order Total</span>
-                                <span class="total_price">$57.50</span>
+                                <span class="total_price">
+                                    @if (session('after_discount'))
+                                        {{ session('after_discount') + session('shipping_charge')}}
+                                        @php
+                                            session(['order_total' => session('after_discount') + session('shipping_charge')])
+                                        @endphp
+                                    @else
+                                        {{ $subtotal + session('shipping_charge') }}
+                                        @php
+                                            session(['order_total' => $subtotal + session('shipping_charge')])
+                                        @endphp
+                                    @endif
+                                </span>
                             </li>
                         </ul>
                     </div>
@@ -174,3 +229,9 @@
         </div>
     </section>
 </div>
+
+{{-- sessions
+1. coupon_info
+2. after_discount
+3. shipping_charge
+4. order_total --}}

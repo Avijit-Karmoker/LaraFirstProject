@@ -48,7 +48,7 @@
                                         <label for="username_input">
                                             <i class="fas fa-user"></i>
                                         </label>
-                                        <input id="username_input" type="email" name="email" value="jatiludatu@mailinator.com">
+                                        <input id="username_input" type="email" name="email" value="ovijit@mailinator.com">
                                     </div>
                                 </div>
 

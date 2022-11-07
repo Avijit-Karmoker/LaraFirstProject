@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use App\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Khsing\World\World;
+use Khsing\World\Models\Country;
 
 class FrontendController extends Controller
 {
@@ -44,6 +46,37 @@ class FrontendController extends Controller
     function cart()
     {
         return view('frontend.cart');
+    }
+
+    function checkout()
+    {
+        $after_explode = explode('/', url()->previous());
+        if(end($after_explode) =='cart'){
+            $countries = World::Countries();
+            return view('frontend.checkout', compact('countries'));
+        }
+        else{
+            abort(404);
+        }
+        // return view('frontend.cart');
+    }
+
+    function getcitylist(Request $request)
+    {
+        $country = Country::getByCode($request->country_code);
+        $cities_from_db = $country->children();
+        $sorted = collect($cities_from_db)->sortBy('name');
+        $cities = $sorted->values()->all();
+        $generated_city_dropdown = "";
+        foreach($cities as $city) {
+            $generated_city_dropdown .= "<option value='$city->id'>$city->name</option>";
+        }
+        return $generated_city_dropdown;
+    }
+
+    function checkout_post(Request $request)
+    {
+        return $request;
     }
 
     function team()

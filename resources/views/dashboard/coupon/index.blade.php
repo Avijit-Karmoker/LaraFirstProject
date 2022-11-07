@@ -48,6 +48,31 @@
                 </div>
             </div>
         </div>
+        <div class="col-xl-6 col-lg-6">
+            <div class="table-responsive">
+                <table class="table table-primary table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Coupon Code</th>
+                            <th scope="col">Coupon Minimum Value</th>
+                            <th scope="col">Discount Type</th>
+                            <th scope="col">Discount Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($coupons as $coupon)
+                            <tr class="">
+                                <td>{{ $coupon->coupon_name }}</td>
+                                <td>{{ $coupon->coupon_minimum_value }}</td>
+                                <td>{{ Str::title($coupon->discount_type) }}</td>
+                                <td>{{ $coupon->coupon_discount_amount }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
     </div>
 </div>
 @endsection
