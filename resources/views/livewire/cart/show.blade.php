@@ -234,4 +234,5 @@
 1. coupon_info
 2. after_discount
 3. shipping_charge
-4. order_total --}}
+4. order_total
+5. subtotal  --}}

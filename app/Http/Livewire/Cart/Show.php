@@ -100,3 +100,10 @@ class Show extends Component
         return view('livewire.cart.show', compact('carts', 'shippings'));
     }
 }
+
+// sessions
+// 1. coupon_info
+// 2. after_discount
+// 3. shipping_charge
+// 4. order_total
+// 5. subtotal

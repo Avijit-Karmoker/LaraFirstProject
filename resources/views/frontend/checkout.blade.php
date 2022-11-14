@@ -111,7 +111,7 @@
                         <div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Payment Option</label>
-                                <select class="form-select" name="payment" id="">
+                                <select class="form-select" name="payment_method" id="">
                                     <option value="">--Select Payment Option--</option>
                                     <option value="cod">Cash On Delivery (COD)</option>
                                     <option value="online">Online Payment</option>
