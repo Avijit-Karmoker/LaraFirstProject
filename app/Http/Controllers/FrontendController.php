@@ -122,15 +122,14 @@ class FrontendController extends Controller
             ])->decrement('quantity', $cart->quantity);
 
             $cart->delete();
+        }
 
+        if($request->payment_method == 'cod'){
             return redirect('cart');
         }
-        // if($request->payment_method == 'cod'){
-
-        // }
-        // else{
-
-        // }
+        else{
+            return redirect('/pay');
+        }
     }
 
     function team()
