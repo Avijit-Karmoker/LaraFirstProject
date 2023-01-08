@@ -18,7 +18,6 @@
         <div class="container h-100">
             <div class="row justify-content-center h-100 align-items-center">
                 <div class="col-md-6">
-
 					<div class="authincation-content">
                         <div class="row no-gutters">
                             <div class="col-xl-12">
@@ -30,7 +29,9 @@
                                     <form method="POST" action="{{ route('register') }}">
                                         @csrf
                                         <div class="form-group">
-                                            <label class="mb-1 text-white"><strong>Username</strong></label>
+                                            <label class="mb-1 text-white">
+                                                <strong>Username</strong>
+                                            </label>
                                             <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="username">
 
                                             @error('name')
@@ -52,17 +53,23 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="mb-1 text-white"><strong>Password</strong></label>
+                                            <label class="mb-1 text-white">
+                                                <strong>Password</strong>
+                                            </label>
                                             <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="mb-1 text-white"><strong>Confirm Password</strong></label>
+                                            <label class="mb-1 text-white">
+                                                <strong>Confirm Password</strong>
+                                            </label>
                                             <input type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" placeholder="Confirm Password">
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="mb-1 text-white"><strong>Phone Number</strong></label>
+                                            <label class="mb-1 text-white">
+                                                <strong>Phone Number</strong>
+                                            </label>
                                             <input type="tel" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" placeholder="Phone Number">
                                         </div>
 

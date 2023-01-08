@@ -32,6 +32,36 @@
                         {{-- @if((auth()->user()->created_at->diffInHours(\Carbon\Carbon::now())) < 1) --}}
                             <h5>Welcome to Account</h5>
                         {{-- @endif --}}
+                        <div class="card border-primary">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <h5>Total Orders</h5>
+                                        <p>{{ $invoices->count() }}</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <h5>Total Buy</h5>
+                                        <p>৳{{ $invoices->sum('order_total') }}</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <h5>COD</h5>
+                                        <p>{{ $invoices->where('payment_method', 'cod')->count() }}</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <h5>Total Orders</h5>
+                                        <p>14</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <h5>Total Paid</h5>
+                                        <p>{{ $invoices->where('payment_status', 'paid')->count() }} (৳{{ $invoices->where('payment_status', 'paid')->sum('order_total') }})</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <h5>Total Unpaid</h5>
+                                        <p>{{ $invoices->where('payment_status', 'paid')->count() }} (৳{{ $invoices->where('payment_status', 'unpaid')->sum('order_total') }})</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                             <h5 class="text-center pb-3">Account Details</h5>

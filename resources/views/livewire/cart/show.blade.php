@@ -71,7 +71,7 @@
                                 <td class="text-center">
                                     <form action="#">
                                         <div class="quantity_input">
-                                            @if (get_inventory($cart->product_id, $cart->size_id, $cart->color_id) > 1)
+                                            @if ($cart->quantity > 1)
                                                 <button wire:click="decrement({{ $cart->id }})" type="button" class="input_number_decrement">
                                                     <i class="fal fa-minus"></i>
                                                 </button>
@@ -108,7 +108,7 @@
                 <div class="row">
                     <div class="col col-lg-6">
                         <div class="coupon_form form_item mb-0">
-                            <input type="text" wire:model="coupon_name" placeholder=" @if (session('coupon_info'))৳{{ session('coupon_info')->coupon_discount_amount }} @else Enter your coupon here @endif ">
+                            <input type="text" wire:model="coupon_name" placeholder=" @if (session('coupon_info'))৳{{ session('coupon_info')->coupon_discount_amount }} @else Enter your coupon here @endif">
                             <button wire:click="apply_coupon({{ $carts->first()->vendor_id }},{{ $subtotal }})" type="submit" class="btn btn_dark">Apply Coupon</button>
                             <div class="info_icon">
                                 <i class="fas fa-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Your Info Here"></i>

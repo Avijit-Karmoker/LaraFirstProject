@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\NewAdminMail;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 use App\Models\Team;
 use App\Models\User;
@@ -30,7 +31,8 @@ class HomeController extends Controller
     public function index()
     {
         if (auth()->user()->role == 'customer') {
-            return view('frontend.customer.dashboard');
+            $invoices = Invoice::where('user_id', auth()->id())->get();
+            return view('frontend.customer.dashboard', compact('invoices'));
         } else {
             return view('home', [
                 'teams' => Team::all(),

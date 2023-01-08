@@ -128,7 +128,7 @@ class FrontendController extends Controller
             return redirect('cart');
         }
         else{
-            return redirect('/pay');
+            return redirect('/pay')->with('invoice_id', $invoice_id);
         }
     }
 

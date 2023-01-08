@@ -87,7 +87,7 @@
                             </ul>
                         </div>
                         <div class="col col-md-6">
-                            <a class="header_hotline" href="{{ route('vendor.regestration') }}">Vendor Regestration</a>
+                            <a class="header_hotline" href="{{ route('vendor.regestration') }}">Vendor</a>
                         </div>
                     </div>
                 </div>
