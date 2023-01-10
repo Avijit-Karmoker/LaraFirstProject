@@ -81,6 +81,7 @@ class FrontendController extends Controller
         $invoice_id = Invoice::insertGetId([
             'user_id' => auth()->id(),
             'vendor_id' => Cart::where('user_id', auth()->id())->first()->vendor_id,
+            // 'product_name' => Cart::where('user_id', auth()->id())->first()->product_id,
             'customer_name' => $request->customer_name,
             'customer_email' => $request->customer_email,
             'customer_phone_number' => $request->customer_phone_number,

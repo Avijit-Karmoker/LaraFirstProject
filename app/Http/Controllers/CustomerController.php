@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\Invoice;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CustomerController extends Controller
 {
@@ -48,5 +51,12 @@ class CustomerController extends Controller
         } else {
             echo "Your email or password is wrong!";
         }
+    }
+    public function download_invoice($id)
+    {
+        $invoice = Invoice::find($id);
+        $carts = Cart::where('user_id', auth()->id())->get();
+        $pdf = Pdf::loadView('pdf.invoice', compact('invoice', 'carts'));
+        return $pdf->download(time().'-invoice.pdf');
     }
 }

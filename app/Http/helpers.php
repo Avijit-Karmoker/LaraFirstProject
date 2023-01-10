@@ -2,6 +2,7 @@
 
 use App\Models\Cart;
 use App\Models\Color;
+use App\Models\Coupon;
 use App\Models\Inventory;
 use App\Models\Product;
 use App\Models\Size;
@@ -44,4 +45,10 @@ function get_inventory($product_id, $size_id, $color_id,) {
         'size_id' => $size_id,
         'color_id' => $color_id,
     ])->first()->quantity;
+}
+
+function get_coupon_price($coupon){
+    return Coupon::where([
+        'coupon_name' => $coupon
+    ])->first()->coupon_minimum_value;
 }
