@@ -11,7 +11,7 @@
     </div>
     <div class="details">
         <h4>
-            <a href="#">{{ $product->product_name }}</a>
+            <a href="#">{{ Str::limit($product->product_name, 22) }}</a>
         </h4>
         <span class="badge bg-secondary">{{ $product->relationshipwithcategory->category_name }}</span>
         <p class="mb-0">

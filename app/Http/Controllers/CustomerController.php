@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Invoice;
 use App\Models\User;
+use App\Models\Invoice_detail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,8 +56,10 @@ class CustomerController extends Controller
     public function download_invoice($id)
     {
         $invoice = Invoice::find($id);
-        $carts = Cart::where('user_id', auth()->id())->get();
-        $pdf = Pdf::loadView('pdf.invoice', compact('invoice', 'carts'));
+        // $carts = Cart::where('user_id', auth()->id())->get();
+        $invoice_details = Invoice_detail::where('invoice_id', $id)->get();
+        return view('pdf.invoice', compact('invoice', 'invoice_details'));
+        $pdf = Pdf::loadView('pdf.invoice', compact('invoice'));
         return $pdf->download(time().'-invoice.pdf');
     }
 }

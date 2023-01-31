@@ -1,194 +1,188 @@
-
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-		<title>A simple, clean, and responsive HTML invoice template</title>
-
-		<!-- Favicon -->
-		<link rel="icon" href="./images/favicon.png" type="image/x-icon" />
-
-		<!-- Invoice styling -->
-		<style>
-			body {
-				font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-				text-align: center;
-				color: #777;
-			}
-
-			body h1 {
-				font-weight: 300;
-				margin-bottom: 0px;
-				padding-bottom: 0px;
-				color: #000;
-			}
-
-			body h3 {
-				font-weight: 300;
-				margin-top: 10px;
-				margin-bottom: 20px;
-				font-style: italic;
-				color: #555;
-			}
-
-			body a {
-				color: #06f;
-			}
-
-			.invoice-box {
-				max-width: 800px;
-				margin: auto;
-				padding: 30px;
-				border: 1px solid #eee;
-				box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-				font-size: 16px;
-				line-height: 24px;
-				font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-				color: #555;
-			}
-
-			.invoice-box table {
-				width: 100%;
-				line-height: inherit;
-				text-align: left;
-				border-collapse: collapse;
-			}
-
-			.invoice-box table td {
-				padding: 5px;
-				vertical-align: top;
-			}
-
-			.invoice-box table tr td:nth-child(2) {
-				text-align: right;
-			}
-
-			.invoice-box table tr.top table td {
-				padding-bottom: 20px;
-			}
-
-			.invoice-box table tr.top table td.title {
-				font-size: 45px;
-				line-height: 45px;
-				color: #333;
-			}
-
-			.invoice-box table tr.information table td {
-				padding-bottom: 40px;
-			}
-
-			.invoice-box table tr.heading td {
-				background: #eee;
-				border-bottom: 1px solid #ddd;
-				font-weight: bold;
-			}
-
-			.invoice-box table tr.details td {
-				padding-bottom: 20px;
-			}
-
-			.invoice-box table tr.item td {
-				border-bottom: 1px solid #eee;
-			}
-
-			.invoice-box table tr.item.last td {
-				border-bottom: none;
-			}
-
-			.invoice-box table tr.total td:nth-child(2) {
-				border-top: 2px solid #eee;
-				font-weight: bold;
-			}
-
-			@media only screen and (max-width: 600px) {
-				.invoice-box table tr.top table td {
-					width: 100%;
-					display: block;
-					text-align: center;
-				}
-
-				.invoice-box table tr.information table td {
-					width: 100%;
-					display: block;
-					text-align: center;
-				}
-			}
-		</style>
-	</head>
-
-	<body>
-
-		<div class="invoice-box">
-			<table>
-				<tr class="top">
-					<td colspan="2">
-						<table>
-							<tr>
-								<td class="title">
-									<img src="https://i.ibb.co/54qPZ08/logo-1x.png" alt="logo-1x">
-                                    {{-- <h1><span style="color: #051D43">sto</span><del style="color: #FBBE32">waa</del></h1> --}}
-								</td>
-
-								<td>
-									Invoice #: {{ $invoice->id }}<br />
-									Created: {{ $invoice->created_at->format('Y-m-d') }}<br />
-									{{-- Due: {{ $invoice->updated_at->format('Y-m-d') }} --}}
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-
-				<tr class="information">
-					<td colspan="2">
-						<table>
-							<tr>
-								<td>
-									{{ $invoice->customer_address }}<br />
-								</td>
-
-								<td>
-									{{ $invoice->customer_name }}<br />
-									{{ $invoice->customer_email }}<br />
-                                    {{ $invoice->customer_phone_number }}
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-
-				<tr class="heading">
-					<td>Payment Method</td>
-
-					<td>Order Total</td>
-				</tr>
-
-				<tr class="details">
-					<td>{{ Str::title($invoice->payment_method) }}</td>
-				</tr>
-
-				<tr class="heading">
-					<td>Item</td>
-
-					<td>Price</td>
-				</tr>
-
-				@foreach ($carts as $item)
-                    <tr class="item">
-                        <td>{{ $item->relationshipwithproduct->product_name }}</td>
-
-                        <td>{{ $invoice->order_total }}</td>
-                    </tr>
-                @endforeach
-
-				<tr class="total">
-					<td></td>
-
-					<td>Total: {{ $invoice->sum('order_total') }}</td>
-				</tr>
-			</table>
-		</div>
-	</body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .invoice{
+            max-width: 600px;
+            margin: auto;
+            background: #f1f2f6;
+            margin-top: 5px;
+            padding: 25px;
+            border-radius: 8px;
+            height: 700px;
+        }
+        .invoice-header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .invoice-header h3{
+            margin: 0;
+        }
+        .invoice-header p{
+            margin: 0;
+        }
+        .invoice-header .text{
+            text-align: right;
+        }
+        .client{
+            padding-left: 6px;
+            border-left: 6px solid #0087C3;
+            float: left;
+        }
+        .client h3{
+            margin: 0;
+        }
+        .client-invoice{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+        .invoice-issue h2{
+            margin: 0;
+        }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin-bottom: 20px;
+        }
+        table .no{
+            color: #FFFFFF;
+            font-size: 1.6em;
+            background: #57B223;
+        }
+        table .total{
+            background: #57B223;
+            color: #FFFFFF;
+        }
+        table th {
+            white-space: nowrap;
+            font-weight: normal;
+            background: #dfe4ea;
+        }
+        table th, table td{
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #FFFFFF;
+        }
+        .desc{
+            text-align: left;
+            background: #dfe4ea;
+        }
+        .unit{
+            background: #d6d1d1;
+        }
+        .qty{
+            background: #dfe4ea;
+        }
+        table tfoot tr td:first-child {
+            border: none;
+        }
+        tfoot td{
+            padding: 10px 20px;
+            border-bottom: none;
+            font-size: 1.2em;
+            white-space: nowrap;
+            border-top: 1px solid #AAAAAA;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="invoice">
+            <div class="invoice-header">
+                <div class="company-logo">
+                    <img src="https://i.ibb.co/54qPZ08/logo-1x.png" alt="company logo">
+                </div>
+                <div class="text">
+                    <h3>Company Name</h3>
+                    <p>address</p>
+                    <p>company phone</p>
+                    <p>company email</p>
+                </div>
+            </div>
+            <hr>
+            <div class="client-invoice">
+                <div class="client">
+                    <div class="to">INVOICE TO:</div>
+                    <h3 class="name">John Doe</h3>
+                    <div class="address">796 Silver Harbour, TX 79273, US</div>
+                    <div class="email"><a href="mailto:john@example.com">john@example.com</a></div>
+                </div>
+                <div class="invoice-issue">
+                    <h2>INVOICE Issue</h2>
+                    <div class="date">Date of Invoice: 01/06/2014</div>
+                    <div class="date">Due Date: 30/06/2014</div>
+                </div>
+            </div>
+            <table cellspacing="0" cellpadding="0">
+                <thead>
+                  <tr>
+                    <th class="no">#</th>
+                    <th class="desc">DESCRIPTION</th>
+                    <th class="unit">UNIT PRICE</th>
+                    <th class="qty">QUANTITY</th>
+                    <th class="total">TOTAL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="no">01</td>
+                    <td class="desc">
+                        <p>Website Design</p>
+                    </td>
+                    <td class="unit">$40.00</td>
+                    <td class="qty">30</td>
+                    <td class="total">$1,200.00</td>
+                  </tr>
+                  <tr>
+                    <td class="no">02</td>
+                    <td class="desc">
+                        <p>Website Development</p>
+                    </td>
+                    <td class="unit">$40.00</td>
+                    <td class="qty">80</td>
+                    <td class="total">$3,200.00</td>
+                  </tr>
+                  <tr>
+                    <td class="no">03</td>
+                    <td class="desc">
+                        <p>Search Engines Optimization</p>
+                    </td>
+                    <td class="unit">$40.00</td>
+                    <td class="qty">20</td>
+                    <td class="total">$800.00</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="2"></td>
+                    <td colspan="2">SUBTOTAL</td>
+                    <td>$5,200.00</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2"></td>
+                    <td colspan="2">TAX 25%</td>
+                    <td>$1,300.00</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2"></td>
+                    <td colspan="2">GRAND TOTAL</td>
+                    <td>$6,500.00</td>
+                  </tr>
+                </tfoot>
+              </table>
+        </div>
+    </div>
+</body>
 </html>

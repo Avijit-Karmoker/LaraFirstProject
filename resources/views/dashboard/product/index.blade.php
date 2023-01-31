@@ -26,7 +26,7 @@
                                     <th>Product Photo</th>
                                     <th>Product Name</th>
                                     <th>Product Regular Price</th>
-                                    <th>Product Discounted Price</th>
+                                    <th>Product Disc. Price</th>
                                     <th>Category Id</th>
                                     <th>Action</th>
                                 </tr>
@@ -43,7 +43,7 @@
                                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="Photo not found" width="100">
                                             @endif
                                         </td>
-                                        <td>{{ $product->product_name }}</td>
+                                        <td>{{ Str::limit($product->product_name, 50) }}</td>
                                         <td><span style="font-weight: 700">৳</span>{{ $product->regular_price }}</td>
                                         <td><span style="font-weight: 700">৳</span>{{ $product->discounted_price }}</td>
                                         <td>
