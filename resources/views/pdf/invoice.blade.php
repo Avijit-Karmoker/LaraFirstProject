@@ -9,6 +9,7 @@
         body{
             margin: 0;
             padding: 0;
+            font-family: 'Times New Roman', Times, serif !important;
         }
         .invoice{
             max-width: 600px;
@@ -17,7 +18,6 @@
             margin-top: 5px;
             padding: 25px;
             border-radius: 8px;
-            height: 700px;
         }
         .invoice-header{
             display: flex;
@@ -58,7 +58,7 @@
         }
         table .no{
             color: #FFFFFF;
-            font-size: 1.6em;
+            font-size: 1.3em;
             background: #57B223;
         }
         table .total{
@@ -96,39 +96,40 @@
             border-top: 1px solid #AAAAAA;
         }
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
     <div>
         <div class="invoice">
             <div class="invoice-header">
                 <div class="company-logo">
-                    <img src="https://i.ibb.co/54qPZ08/logo-1x.png" alt="company logo">
+                    <img src="https://www.freepnglogos.com/uploads/original-samsung-logo-10.png" width="150" alt="company logo">
                 </div>
                 <div class="text">
-                    <h3>Company Name</h3>
-                    <p>address</p>
-                    <p>company phone</p>
-                    <p>company email</p>
+                    <h3>Samsung</h3>
+                    <p>Dhaka, Bangladesh</p>
+                    <p>+88 09612300300</p>
+                    <p>feedback.bd@samsung.com</p>
                 </div>
             </div>
             <hr>
             <div class="client-invoice">
                 <div class="client">
                     <div class="to">INVOICE TO:</div>
-                    <h3 class="name">John Doe</h3>
-                    <div class="address">796 Silver Harbour, TX 79273, US</div>
-                    <div class="email"><a href="mailto:john@example.com">john@example.com</a></div>
+                    <h3 class="name">{{ Str::title($invoice->customer_name) }}</h3>
+                    <div class="address">{{ $invoice->customer_address }}, {{ Str::upper($invoice->customer_country_id) }}</div>
+                    <div class="email"><a href="mailto:john@example.com">{{ $invoice->customer_email }}</a></div>
                 </div>
                 <div class="invoice-issue">
                     <h2>INVOICE Issue</h2>
-                    <div class="date">Date of Invoice: 01/06/2014</div>
-                    <div class="date">Due Date: 30/06/2014</div>
+                    <div class="date">Date of Invoice: {{ \Carbon\Carbon::now()->format("d/m/Y") }}</div>
+                    <div class="date">Due Date: {{ $invoice->created_at->format("d/m/Y") }}</div>
                 </div>
             </div>
             <table cellspacing="0" cellpadding="0">
                 <thead>
                   <tr>
-                    <th class="no">#</th>
+                    <th class="no">ID</th>
                     <th class="desc">DESCRIPTION</th>
                     <th class="unit">UNIT PRICE</th>
                     <th class="qty">QUANTITY</th>
@@ -136,49 +137,33 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="no">01</td>
-                    <td class="desc">
-                        <p>Website Design</p>
-                    </td>
-                    <td class="unit">$40.00</td>
-                    <td class="qty">30</td>
-                    <td class="total">$1,200.00</td>
-                  </tr>
-                  <tr>
-                    <td class="no">02</td>
-                    <td class="desc">
-                        <p>Website Development</p>
-                    </td>
-                    <td class="unit">$40.00</td>
-                    <td class="qty">80</td>
-                    <td class="total">$3,200.00</td>
-                  </tr>
-                  <tr>
-                    <td class="no">03</td>
-                    <td class="desc">
-                        <p>Search Engines Optimization</p>
-                    </td>
-                    <td class="unit">$40.00</td>
-                    <td class="qty">20</td>
-                    <td class="total">$800.00</td>
-                  </tr>
+                  @foreach ($invoice_details as $invoice_detail)
+                    <tr>
+                      <td class="no">#{{ $invoice_detail->product_id }}</td>
+                      <td class="desc">
+                          <p>{{ $invoice_detail->relationshipwithproduct->product_name }}</p>
+                      </td>
+                      <td class="unit">৳{{ $invoice_detail->unit_price }}</td>
+                      <td class="qty">{{ $invoice_detail->quantity }}</td>
+                      <td class="total">৳{{ $invoice_detail->unit_price * $invoice_detail->quantity }}</td>
+                    </tr>
+                  @endforeach
                 </tbody>
                 <tfoot>
                   <tr>
                     <td colspan="2"></td>
-                    <td colspan="2">SUBTOTAL</td>
-                    <td>$5,200.00</td>
+                    <td colspan="2" class="text-start">SUBTOTAL</td>
+                    <td style="font-size: 16px;">৳{{ $invoice->after_discount }}</td>
                   </tr>
                   <tr>
                     <td colspan="2"></td>
-                    <td colspan="2">TAX 25%</td>
-                    <td>$1,300.00</td>
+                    <td colspan="2" class="text-start">SHIPPING CHARGE</td>
+                    <td style="font-size: 16px;">৳{{ $invoice->shipping_charge }}</td>
                   </tr>
                   <tr>
                     <td colspan="2"></td>
-                    <td colspan="2">GRAND TOTAL</td>
-                    <td>$6,500.00</td>
+                    <td colspan="2" class="text-start">GRAND TOTAL</td>
+                    <td style="font-size: 16px;">৳{{ $invoice->order_total }}</td>
                   </tr>
                 </tfoot>
               </table>

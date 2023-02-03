@@ -99,6 +99,9 @@
                             </div>
                         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                             <h5 class="text-center pb-3">Your Orders</h5>
+                            <div class="text-end my-3">
+                                <a href="{{ route('download.invoice.all', auth()->id()) }}" class="text-center btn-sm btn-info">Download All</a>
+                            </div>
                             <table class="table table-bordered">
                                 <tr>
                                     <th>SL</th>
@@ -117,7 +120,10 @@
                                 @endphp
                                     <tr>
                                         <td>{{ $loop->index+1 }}</td>
-                                        <td>{{ $invoice->id }}</td>
+                                        <td>
+                                            #{{ $invoice->id . "-" . $invoice->created_at->format('dmY') }}
+                                            {!! DNS2D::getBarcodeHTML($invoice->id . "-" . $invoice->created_at->format('dmY'), 'QRCODE'); !!}
+                                        </td>
                                         <td>{{ ($invoice->order_total + get_coupon_price($coupon)) - $invoice->shipping_charge }}</td>
                                         <td>{{ get_coupon_price($coupon) }}</td>
                                         <td>{{ $invoice->shipping_charge }}</td>

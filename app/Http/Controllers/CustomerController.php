@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\InvoicesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerController extends Controller
 {
@@ -53,13 +55,17 @@ class CustomerController extends Controller
             echo "Your email or password is wrong!";
         }
     }
+
     public function download_invoice($id)
     {
         $invoice = Invoice::find($id);
-        // $carts = Cart::where('user_id', auth()->id())->get();
         $invoice_details = Invoice_detail::where('invoice_id', $id)->get();
-        return view('pdf.invoice', compact('invoice', 'invoice_details'));
-        $pdf = Pdf::loadView('pdf.invoice', compact('invoice'));
-        return $pdf->download(time().'-invoice.pdf');
+        $pdf = Pdf::loadView('pdf.invoice', compact('invoice', 'invoice_details'));
+        return $pdf->setPaper('a4', 'portrait')->stream(time().'-invoice.pdf');
+    }
+
+    public function download_invoice_all($id)
+    {
+        return Excel::download(new InvoicesExport, 'invoices.xlsx');
     }
 }
