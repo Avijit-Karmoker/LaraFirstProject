@@ -122,7 +122,7 @@
                                         <td>{{ $loop->index+1 }}</td>
                                         <td>
                                             #{{ $invoice->id . "-" . $invoice->created_at->format('dmY') }}
-                                            {!! DNS2D::getBarcodeHTML($invoice->id . "-" . $invoice->created_at->format('dmY'), 'QRCODE'); !!}
+                                            {{-- {!! DNS2D::getBarcodeHTML($invoice->id . "-" . $invoice->created_at->format('dmY'), 'QRCODE'); !!} --}}
                                         </td>
                                         <td>{{ ($invoice->order_total + get_coupon_price($coupon)) - $invoice->shipping_charge }}</td>
                                         <td>{{ get_coupon_price($coupon) }}</td>

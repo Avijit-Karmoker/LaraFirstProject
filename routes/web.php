@@ -74,11 +74,13 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-//Vendor Regestration
+//Vendor
 Route::get('/vendor/regestration', [VendorController::class, 'vendor_regestration'])->name('vendor.regestration');
 Route::post('/vendor/regestration', [VendorController::class, 'vendor_regestration_post'])->name('vendor.regestration.post');
 Route::get('/vendor/login', [VendorController::class, 'vendor_login'])->name('vendor.login');
 Route::Post('/vendor/login', [VendorController::class, 'vendor_login_post'])->name('vendor.login.post');
+Route::get('/vendor/order/{id}', [VendorController::class, 'vendor_order'])->name('vendor.order');
+Route::post('/vendor/order/status/change/{id}', [VendorController::class, 'vendor_order_status_change'])->name('vendor.order.status.change');
 
 //Middleware
 Route::middleware(['admin_rolechecker'])->group(function () {

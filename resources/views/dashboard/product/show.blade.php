@@ -16,7 +16,7 @@
         <div class="col-md-6 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Profile Photo Upload</h4>
+                    <h4 class="card-title">Category</h4>
                 </div>
                 <div class="card-body">
                     <div class="basic-form">

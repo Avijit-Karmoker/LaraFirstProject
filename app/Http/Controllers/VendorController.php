@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -65,5 +66,28 @@ class VendorController extends Controller
         //     'role' => 'vendor',
         // ]);
         return redirect('/vendor/login');
+    }
+
+    public function vendor_order()
+    {
+        $invoices = Invoice::with(['invoice_details' => function($q){
+            $q->with('relationshipwithproduct');
+        }])->where('vendor_id', auth()->id())->get();
+        return view('dashboard.vendor.order', compact('invoices'));
+    }
+
+    public function vendor_order_status_change(Request $request, $id)
+    {
+        Invoice::find($id)->update([
+            'order_status' => $request->order_status
+        ]);
+        if($request->order_status == 'delivered'){
+            if(Invoice::find($id)->payment_method == 'cod'){
+                Invoice::find($id)->update([
+                    'payment_status' => 'paid'
+                ]);
+            }
+        }
+        return back();
     }
 }

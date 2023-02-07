@@ -759,7 +759,7 @@
                                         <img src="{{ asset('dashboard_assets') }}/images/profile/default_profile_photo.png" class="img-fluid rounded-circle" alt="">
                                     @endif
 									<div class="header-info">
-										<span class="text-black"><strong>{{ auth()->user()->name }}</strong></span>
+										<span class="text-black"><strong>{{ Str::title(auth()->user()->name) }}</strong></span>
 										<p class="fs-12 mb-0">{{ ucfirst(auth()->user()->role) }}</p>
 									</div>
                                 </a>
@@ -856,6 +856,22 @@
                         <a class="ai-icon" href="{{ route('coupon.index') }}" aria-expanded="false">
 							<i class="flaticon-381-layer-1"></i>
 							<span class="nav-text">Coupon</span>
+						</a>
+                    </li>
+                    <li>
+                        <a class="ai-icon" href="{{ route('vendor.order', auth()->id()) }}" aria-expanded="false">
+							<i class="flaticon-381-layer-1"></i>
+							<span class="nav-text">
+                                Order
+                                <sup
+                                    style="background: green;
+                                    padding: 2px 5px;
+                                    color: #fff;
+                                    border-radius: 25px;"
+                                >
+                                    5
+                                </sup>
+                            </span>
 						</a>
                     </li>
                     @endif
