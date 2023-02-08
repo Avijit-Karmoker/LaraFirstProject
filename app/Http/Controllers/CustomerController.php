@@ -68,4 +68,9 @@ class CustomerController extends Controller
     {
         return Excel::download(new InvoicesExport, 'invoices.xlsx');
     }
+
+    public function give_review($id){
+        $invoice_details = Invoice_detail::with('relationshipwithproduct')->where('invoice_id', $id)->get();
+        return view('frontend.customer.review', compact('invoice_details'));
+    }
 }

@@ -111,6 +111,7 @@
                                     <th>Delivery Charge</th>
                                     <th>Payment</th>
                                     <th>Payment Status</th>
+                                    <th>Order Status</th>
                                     <th>Total</th>
                                     <th>Action</th>
                                 </tr>
@@ -124,14 +125,20 @@
                                             #{{ $invoice->id . "-" . $invoice->created_at->format('dmY') }}
                                             {{-- {!! DNS2D::getBarcodeHTML($invoice->id . "-" . $invoice->created_at->format('dmY'), 'QRCODE'); !!} --}}
                                         </td>
-                                        <td>{{ ($invoice->order_total + get_coupon_price($coupon)) - $invoice->shipping_charge }}</td>
+                                        <td>৳{{ ($invoice->order_total + get_coupon_price($coupon)) - $invoice->shipping_charge }}</td>
                                         <td>{{ get_coupon_price($coupon) }}</td>
                                         <td>{{ $invoice->shipping_charge }}</td>
-                                        <td>{{ $invoice->payment_method }}</td>
-                                        <td>{{ $invoice->payment_status }}</td>
+                                        <td>{{ Str::title($invoice->payment_method) }}</td>
+                                        <td>{{ Str::title($invoice->payment_status) }}</td>
+                                        <td>{{ Str::title($invoice->order_status) }}</td>
                                         <td>{{ $invoice->order_total }}</td>
                                         <td>
-                                            <a href="{{ route('download.invoice', $invoice->id) }}" class="btn-sm btn-primary">Download Invoice</a>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <a href="{{ route('download.invoice', $invoice->id) }}" class="btn-sm btn-primary">Download</a>
+                                                @if ($invoice->order_status == 'delivered')
+                                                    <a href="{{ route('give.review', $invoice->id) }}" class="ms-2 btn-sm btn-secondary">Review</a>
+                                                @endif
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
