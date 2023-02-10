@@ -138,11 +138,7 @@
 <!--**********************************
     Content body end
 ***********************************-->
-<script>
-    $(document).ready(function() {
-        Swal.fire('Any fool can use a computer');
-    });
-</script>
+
 @endsection
 
 @section('footer-script')

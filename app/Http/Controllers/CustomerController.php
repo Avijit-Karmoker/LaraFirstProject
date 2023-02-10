@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\InvoicesExport;
+use App\Models\Review;
 use Maatwebsite\Excel\Facades\Excel;
+use Image;
 
 class CustomerController extends Controller
 {
@@ -73,4 +75,38 @@ class CustomerController extends Controller
         $invoice_details = Invoice_detail::with('relationshipwithproduct')->where('invoice_id', $id)->get();
         return view('frontend.customer.review', compact('invoice_details'));
     }
+
+    public function insert_review(Request $request, $invoice_details_id){
+        $product_id = Invoice_detail::find($invoice_details_id)->product_id;
+
+        if($request->hasfile('review_image')) {
+            $extention = $request->file('review_image')->getClientOriginalExtension();
+            $new_review_image = $invoice_details_id . "-" . Carbon::now()->format('Y_m_d') . "." . $extention;
+            $img = Image::make($request->file('review_image'))->resize(800, 609);
+            $img->save(base_path('public/uploads/review_image/' . $new_review_image), 80);
+
+            Review::insert([
+                'user_id' => auth()->id(),
+                'product_id' => $product_id,
+                'invoice_details_id' => $invoice_details_id,
+                'rating' => $request->rating,
+                'comment' => $request->comments,
+                'review_image' => $new_review_image,
+                'created_at' => Carbon::now(),
+            ]);
+        }
+        else{
+            Review::insert([
+                'user_id' => auth()->id(),
+                'product_id' => $product_id,
+                'invoice_details_id' => $invoice_details_id,
+                'rating' => $request->rating,
+                'comment' => $request->comments,
+                'created_at' => Carbon::now(),
+            ]);
+        }
+
+        return back();
+    }
 }
+

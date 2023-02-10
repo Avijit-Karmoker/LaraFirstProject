@@ -23,10 +23,10 @@ return new class extends Migration
             $table->float('discounted_price', 8, 2)->nullable();
             $table->longText('description');
             $table->text('short_description')->nullable();
-            $table->LongText('additional_discription');
+            $table->LongText('additional_discription')->nullable();
             $table->string('thumbnail')->nullable();
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes()->nullable();
         });
     }
 

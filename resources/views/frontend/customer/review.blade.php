@@ -17,6 +17,57 @@
             span:hover{
                 cursor: pointer;
             }
+            .review-button{
+                border: none;
+                background: rgb(2, 175, 2);
+                padding: 10px 25px;
+                border-radius: 8px;
+                margin-top: 2%;
+                color: #fff;
+            }
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            .rate {
+                float: left;
+                height: 46px;
+                padding: 0 10px 0 0;
+            }
+            .rate:not(:checked) > input {
+                position:absolute;
+                /* top:-9999px; */
+                display: none;
+            }
+            .rate:not(:checked) > label {
+                float:right;
+                width:1em;
+                overflow:hidden;
+                white-space:nowrap;
+                cursor:pointer;
+                font-size:30px;
+                color:#ccc;
+            }
+            .rate:not(:checked) > label:before {
+                content: '★ ';
+            }
+            .rate > input:checked ~ label {
+                color: #ffc700;
+            }
+            .rate:not(:checked) > label:hover,
+            .rate:not(:checked) > label:hover ~ label {
+                color: #deb217;
+            }
+            .rate > input:checked + label:hover,
+            .rate > input:checked + label:hover ~ label,
+            .rate > input:checked ~ label:hover,
+            .rate > input:checked ~ label:hover ~ label,
+            .rate > label:hover ~ input:checked ~ label {
+                color: #c59b08;
+            }
+            .block{
+                margin-bottom: 0;
+            }
         </style>
     <!-- account_section - start
     ================================================== -->
@@ -41,24 +92,35 @@
                                     </div>
                                 </div>
                                 <div class="px-4">
-                                    <form action="" method="POST">
-                                        <div class="mb-3">
-                                          <label for="" class="form-label">Rating</label>
-                                          <div id="rating">
-                                            <span class="star fs-4" onclick="setRating(1)" id="{{ $invoice_detail->id }}">&#9733;</span>
-                                            <span class="star fs-4" onclick="setRating(2)" id="{{ $invoice_detail->id }}">&#9733;</span>
-                                            <span class="star fs-4" onclick="setRating(3)" id="{{ $invoice_detail->id }}">&#9733;</span>
-                                            <span class="star fs-4" onclick="setRating(4)" id="{{ $invoice_detail->id }}">&#9733;</span>
-                                            <span class="star fs-4" onclick="setRating(5)" id="{{ $invoice_detail->id }}">&#9733;</span>
-                                          </div>
+                                    <form action="{{ route('insert.review', $invoice_detail->id) }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="rate mb-4">
+                                            <p class="block">Rating</p>
+                                            <input type="radio" id="star5_{{ $invoice_detail->id }}" name="rating" value="5" />
+                                            <label for="star5_{{ $invoice_detail->id }}" title="text">5 stars</label>
+                                            <input type="radio" id="star4_{{ $invoice_detail->id }}" name="rating" value="4" />
+                                            <label for="star4_{{ $invoice_detail->id }}" title="text">4 stars</label>
+                                            <input type="radio" id="star3_{{ $invoice_detail->id }}" name="rating" value="3" />
+                                            <label for="star3_{{ $invoice_detail->id }}" title="text">3 stars</label>
+                                            <input type="radio" id="star2_{{ $invoice_detail->id }}" name="rating" value="2" />
+                                            <label for="star2_{{ $invoice_detail->id }}" title="text">2 stars</label>
+                                            <input type="radio" id="star1_{{ $invoice_detail->id }}" name="rating" value="1" />
+                                            <label for="star1_{{ $invoice_detail->id }}" title="text">1 star</label>
                                         </div>
-                                        <div class="mb-3">
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <div class="mb-4">
                                           <label for="" class="form-label">Comment</label>
-                                          <textarea type="text" class="form-control" name="" rows="3"></textarea>
+                                          <textarea type="text" class="form-control" name="comments" rows="3"></textarea>
                                         </div>
                                         <div class="mb-3">
                                           <label for="" class="form-label">Upload Image</label>
-                                          <input type="file" class="form-control" name="">
+                                          <input type="file" class="form-control" name="review_image">
+                                        </div>
+                                        <div class="mb-3">
+                                          <button type="submit" class="review-button">Give Review</button>
                                         </div>
                                     </form>
                                 </div>

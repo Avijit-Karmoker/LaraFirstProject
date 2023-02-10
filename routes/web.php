@@ -57,6 +57,7 @@ Route::get('download/invoice/all/{id}', [CustomerController::class, 'download_in
 Route::post('/customer/register', [CustomerController::class, 'customer_register'])->name('customer.register');
 Route::post('/customer/login', [CustomerController::class, 'customer_login'])->name('customer.login');
 Route::get('/give/review/{id}', [CustomerController::class, 'give_review'])->name('give.review');
+Route::post('/insert/review/{invoice_details_id}', [CustomerController::class, 'insert_review'])->name('insert.review');
 
 //Email verification Notice
 Route::get('/email/verify', function () {
