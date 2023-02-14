@@ -19,12 +19,33 @@
                 {{ Str::limit($product->short_description, 30) }}
             </a>
         </p>
-        <div class="rating mb-1">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star-half-alt"></i>
+        {{-- <div class="d-flex align-items-center">
+            <div>
+                {{ average_fuction($product->id) }}
+            </div>
+            <div class="rating mb-1 ms-1">
+                <i class="fas fa-star"></i>
+            </div>
+        </div> --}}
+        <div class="rating">
+            @if (average_fuction($product->id) == 0)
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+            @endif
+            @for ($i=1; $i<=average_fuction($product->id); $i++)
+                <i class="fas fa-star"></i>
+            @endfor
+            @php
+                $empty_stars = 5-average_fuction($product->id);
+            @endphp
+            @if ($empty_stars != 5)
+                @for ($i=1; $i<=$empty_stars; $i++)
+                    <i class="fas fa-star"></i>
+                @endfor
+            @endif
         </div>
         <span class="price">
             @if ($product->discounted_price)

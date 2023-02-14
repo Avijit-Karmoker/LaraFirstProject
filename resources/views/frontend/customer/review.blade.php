@@ -81,49 +81,51 @@
                         </div>
                         <div class="card-body">
                             @foreach ($invoice_details as $invoice_detail)
-                                <div class="d-flex align-items-center justify-content-between px-4">
-                                    <div>
-                                        <p>Product Name: {{ $invoice_detail->relationshipwithproduct->product_name }}</p>
-                                        <p>Quantity: {{ $invoice_detail->quantity }}</p>
-                                        <p>Price: {{ $invoice_detail->relationshipwithproduct->discounted_price * $invoice_detail->quantity }}</p>
+                                @if (!has_reviews($invoice_detail->id))
+                                    <div class="d-flex align-items-center justify-content-between px-4">
+                                        <div>
+                                            <p>Product Name: {{ $invoice_detail->relationshipwithproduct->product_name }}</p>
+                                            <p>Quantity: {{ $invoice_detail->quantity }}</p>
+                                            <p>Price: {{ $invoice_detail->relationshipwithproduct->discounted_price * $invoice_detail->quantity }}</p>
+                                        </div>
+                                        <div>
+                                            <img width="200" src="{{ asset('uploads/product_thumbnail') }}/{{ $invoice_detail->relationshipwithproduct->thumbnail }}" alt="">
+                                        </div>
                                     </div>
-                                    <div>
-                                        <img width="200" src="{{ asset('uploads/product_thumbnail') }}/{{ $invoice_detail->relationshipwithproduct->thumbnail }}" alt="">
+                                    <div class="px-4">
+                                        <form action="{{ route('insert.review', $invoice_detail->id) }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="rate mb-4">
+                                                <p class="block">Rating</p>
+                                                <input type="radio" id="star5_{{ $invoice_detail->id }}" name="rating" value="5" />
+                                                <label for="star5_{{ $invoice_detail->id }}" title="text">5 stars</label>
+                                                <input type="radio" id="star4_{{ $invoice_detail->id }}" name="rating" value="4" />
+                                                <label for="star4_{{ $invoice_detail->id }}" title="text">4 stars</label>
+                                                <input type="radio" id="star3_{{ $invoice_detail->id }}" name="rating" value="3" />
+                                                <label for="star3_{{ $invoice_detail->id }}" title="text">3 stars</label>
+                                                <input type="radio" id="star2_{{ $invoice_detail->id }}" name="rating" value="2" />
+                                                <label for="star2_{{ $invoice_detail->id }}" title="text">2 stars</label>
+                                                <input type="radio" id="star1_{{ $invoice_detail->id }}" name="rating" value="1" />
+                                                <label for="star1_{{ $invoice_detail->id }}" title="text">1 star</label>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <div class="mb-4">
+                                              <label for="" class="form-label">Comment</label>
+                                              <textarea type="text" class="form-control" name="comments" rows="3"></textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                              <label for="" class="form-label">Upload Image</label>
+                                              <input type="file" class="form-control" name="review_image">
+                                            </div>
+                                            <div class="mb-3">
+                                              <button type="submit" class="review-button">Give Review</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                </div>
-                                <div class="px-4">
-                                    <form action="{{ route('insert.review', $invoice_detail->id) }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="rate mb-4">
-                                            <p class="block">Rating</p>
-                                            <input type="radio" id="star5_{{ $invoice_detail->id }}" name="rating" value="5" />
-                                            <label for="star5_{{ $invoice_detail->id }}" title="text">5 stars</label>
-                                            <input type="radio" id="star4_{{ $invoice_detail->id }}" name="rating" value="4" />
-                                            <label for="star4_{{ $invoice_detail->id }}" title="text">4 stars</label>
-                                            <input type="radio" id="star3_{{ $invoice_detail->id }}" name="rating" value="3" />
-                                            <label for="star3_{{ $invoice_detail->id }}" title="text">3 stars</label>
-                                            <input type="radio" id="star2_{{ $invoice_detail->id }}" name="rating" value="2" />
-                                            <label for="star2_{{ $invoice_detail->id }}" title="text">2 stars</label>
-                                            <input type="radio" id="star1_{{ $invoice_detail->id }}" name="rating" value="1" />
-                                            <label for="star1_{{ $invoice_detail->id }}" title="text">1 star</label>
-                                        </div>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <div class="mb-4">
-                                          <label for="" class="form-label">Comment</label>
-                                          <textarea type="text" class="form-control" name="comments" rows="3"></textarea>
-                                        </div>
-                                        <div class="mb-3">
-                                          <label for="" class="form-label">Upload Image</label>
-                                          <input type="file" class="form-control" name="review_image">
-                                        </div>
-                                        <div class="mb-3">
-                                          <button type="submit" class="review-button">Give Review</button>
-                                        </div>
-                                    </form>
-                                </div>
+                                @endif
                             @endforeach
                         </div>
                     </div>
