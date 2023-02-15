@@ -59,7 +59,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="50">
-                                            Order Details
+                                            <p class="font-weight-bold mb-1">Order Details</p>
                                             @foreach ($invoice->invoice_details as $single_product)
                                                 <h6>{{ $single_product->relationshipwithproduct->product_name }}</h6>
                                             @endforeach

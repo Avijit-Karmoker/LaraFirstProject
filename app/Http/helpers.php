@@ -4,6 +4,7 @@ use App\Models\Cart;
 use App\Models\Color;
 use App\Models\Coupon;
 use App\Models\Inventory;
+use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\Size;
@@ -65,4 +66,8 @@ function average_fuction($product_id){
     else{
         return 0;
     }
+}
+
+function order_count(){
+    return Invoice::where('vendor_id', auth()->id())->count();
 }

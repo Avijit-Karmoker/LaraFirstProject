@@ -90,4 +90,21 @@ class VendorController extends Controller
         }
         return back();
     }
+
+    public function vendor_wallet()
+    {
+        $invoices = Invoice::with(['invoice_details' => function($q){
+            $q->with('relationshipwithproduct');
+        }])->where([
+            'vendor_id' => auth()->id(),
+            'payment_status' => 'paid',
+            'order_status' => 'delivered'
+        ])->get();
+        return view('dashboard.vendor.wallet', compact('invoices'));
+    }
+
+    public function vendor_wallet_withdraw(Request $request)
+    {
+        return $request;
+    }
 }

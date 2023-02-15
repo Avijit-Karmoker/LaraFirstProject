@@ -865,17 +865,22 @@
                                 Order
                                 <sup
                                     style="background: green;
-                                    padding: 2px 5px;
+                                    padding: 2px 8px;
                                     color: #fff;
                                     border-radius: 25px;"
                                 >
-                                    5
+                                    {{ order_count() }}
                                 </sup>
                             </span>
 						</a>
                     </li>
+                    <li>
+                        <a class="ai-icon" href="{{ route('vendor.wallet') }}" aria-expanded="false">
+							<i class="flaticon-381-layer-1"></i>
+							<span class="nav-text">Wallet</span>
+						</a>
+                    </li>
                     @endif
-
                 </ul>
 
 				<div class="copyright">
