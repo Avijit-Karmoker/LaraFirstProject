@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use App\Models\User;
+use App\Models\Withdrawl;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -105,6 +106,23 @@ class VendorController extends Controller
 
     public function vendor_wallet_withdraw(Request $request)
     {
-        return $request;
+        $invoices = Invoice::whereIn('id', $request->invoices)->get();
+        return view('dashboard.vendor.wallet_withdraw', compact('invoices'));
+    }
+
+    public function vendor_wallet_withdraw_request(Request $request)
+    {
+        $withdraw_ids = explode(',', rtrim(ltrim($request->withdraw_ids, '['), ']'));
+        foreach($withdraw_ids as $withdraw_id){
+            Withdrawl::insert([
+                'invoice_id' => $withdraw_id,
+                'vendor_id' => auth()->id(),
+                'created_at' => Carbon::now(),
+            ]);
+            Invoice::find($withdraw_id)->update([
+                'withdraw_status' => 'request sent',
+            ]);
+        }
+        return redirect('vendor/wallet');
     }
 }

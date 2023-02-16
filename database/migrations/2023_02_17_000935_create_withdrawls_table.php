@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('invoices', function (Blueprint $table) {
-            $table->string('withdraw_status')->default('not requested yet');
+        Schema::create('withdrawls', function (Blueprint $table) {
+            $table->id();
+            $table->integer('invoice_id');
+            $table->integer('vendor_id');
+            $table->string('status')->default('unpaid');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('invoices', function (Blueprint $table) {
-            $table->dropColumn('withdraw_status');
-        });
+        Schema::dropIfExists('withdrawls');
     }
 };

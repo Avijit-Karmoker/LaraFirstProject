@@ -49,14 +49,12 @@
                                             <td>৳{{ $invoice->order_total - floor(($invoice->order_total * 10)/100) }}</td>
                                             <td>{{ $invoice->created_at->diffForHumans() }}</td>
                                             <td>
-                                                @if ($invoice->withdraw_status)
-                                                    <span class="badge bg-success" style="color: #fff">Withdraw done!</span>
-                                                @else
-                                                    <span class="badge bg-info" style="color: #fff">Not withdraw yet!</span>
-                                                @endif
+                                                {{ Str::title($invoice->withdraw_status) }}
                                             </td>
                                             <td>
-                                                <input type="checkbox" name="invoice[]" value="{{ $invoice->id }}">
+                                                @if ($invoice->withdraw_status == 'not requested yet')
+                                                    <input type="checkbox" name="invoices[]" value="{{ $invoice->id }}">
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>

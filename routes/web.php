@@ -85,6 +85,7 @@ Route::get('/vendor/order/{id}', [VendorController::class, 'vendor_order'])->nam
 Route::post('/vendor/order/status/change/{id}', [VendorController::class, 'vendor_order_status_change'])->name('vendor.order.status.change');
 Route::get('/vendor/wallet', [VendorController::class, 'vendor_wallet'])->name('vendor.wallet');
 Route::post('/vendor/wallet/withdraw', [VendorController::class, 'vendor_wallet_withdraw'])->name('vendor.wallet.withdraw');
+Route::post('/vendor/wallet/withdraw/request', [VendorController::class, 'vendor_wallet_withdraw_request'])->name('vendor.wallet.withdraw.request');
 
 //Middleware
 Route::middleware(['admin_rolechecker'])->group(function () {
